@@ -18,7 +18,7 @@
 		ArrayList<MemberBean> arr = mDao.allSelectMember();
 	%>
 	
-	<h1>모든 회원 보기</h2>
+	<h1 style="text-align:center">모든 회원 보기</h2>
 	
 	<div style="display:flex; justify-content:center;">
 		<table width="800" border="1">
