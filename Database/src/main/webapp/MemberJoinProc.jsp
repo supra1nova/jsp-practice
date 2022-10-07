@@ -38,6 +38,9 @@
 	
 	// 회원 가입 정보 DB 저장
 	mdao.insertMember(mBean);
+	
+	// 회원 가입 완료시 회원 정보를 보여주는 페이지로 이동시킴
+	response.sendRedirect("MemberList.jsp");
 %>
 
 

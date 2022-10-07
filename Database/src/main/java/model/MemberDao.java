@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 // db 연결 및 select, insert, update, delete 작업을 실행해주는 클래스.
 public class MemberDao {
@@ -39,7 +40,8 @@ public class MemberDao {
 			// 3. 접속후 쿼리 준비해 쿼리를 사용하도록 설정
 			String sql = "insert into jspPractice1.member VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
+			
 			pstmt.setString(1, mBean.getId());
 			pstmt.setString(2, mBean.getPass1());
 			pstmt.setString(3, mBean.getEmail());
@@ -58,5 +60,47 @@ public class MemberDao {
 		} finally {
 			con.close();
 		}
+	}
+	
+	public ArrayList<MemberBean> allSelectMember() throws SQLException{
+		ArrayList<MemberBean> arr = new ArrayList<>();
+		
+		// IO, DB, thread, network는 반드시 예외 처리를 해야한다!!
+		try {
+			getCon();
+			
+			// 쿼리 준
+			String sql = "Select * from jspPractice1.member";
+			
+			// 쿼리를 실행시켜주는 객체 선언
+			pstmt = con.prepareStatement(sql);
+			
+			// 쿼리를 실행 시킨 결과를 리턴해서 수신
+			rs = pstmt.executeQuery();
+			
+			// 반복문을 사용해 rs에 저장된 데이터를 추출해야함
+			while(rs.next()) {	// 저장된 데이터가 존재하는 만큼 반복하겠다는 뜻
+				MemberBean bean = new MemberBean(); // 칼럼으로 나뉘어진 데이터를 빈클래스에 저장
+				bean.setId(rs.getString(1));
+				bean.setPass1(rs.getString(2));
+				bean.setEmail(rs.getString(3));
+				bean.setTel(rs.getString(4));
+				bean.setHodbby(rs.getString(5));
+				bean.setJob(rs.getString(6));
+				bean.setAge(rs.getString(7));
+				bean.setInfo(rs.getString(8));
+				
+				// 패키징된 memberBean 클래스를 array에 저장
+				arr.add(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 자원 반납
+			con.close()
+			;
+		}
+		
+		return arr;
 	}
 }
