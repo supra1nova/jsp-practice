@@ -10,7 +10,7 @@ public class MemberBean {
 	private String hodbby;
 	private String job;
 	private String age;
-	private String infi;
+	private String info;
 	
 	public String getId() {
 		return id;
@@ -60,11 +60,11 @@ public class MemberBean {
 	public void setAge(String age) {
 		this.age = age;
 	}
-	public String getInfi() {
-		return infi;
+	public String getInfo() {
+		return info;
 	}
-	public void setInfi(String infi) {
-		this.infi = infi;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 	
 	
