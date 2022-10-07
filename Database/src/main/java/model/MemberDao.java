@@ -69,10 +69,10 @@ public class MemberDao {
 		try {
 			getCon();
 			
-			// 쿼리 준
+			// 쿼리 준비
 			String sql = "Select * from jspPractice1.member";
 			
-			// 쿼리를 실행시켜주는 객체 선언
+			// 쿼리를 실행시켜주는 객체 선언/정의
 			pstmt = con.prepareStatement(sql);
 			
 			// 쿼리를 실행 시킨 결과를 리턴해서 수신
@@ -102,5 +102,42 @@ public class MemberDao {
 		}
 		
 		return arr;
+	}
+	
+	public MemberBean oneSelectMember(String id) throws SQLException {
+		MemberBean mBean = new MemberBean();
+		
+		try {
+			getCon();
+			
+			// 쿼리 준비
+			String sql = "Select * from jspPractice1.member where id = ?";
+			
+			// 쿼리를 실행시켜주는 객체 선언/정의, 그리고 매핑
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			// 쿼리를 실행 시킨 결과를 리턴해서 수신
+			rs = pstmt.executeQuery();
+
+			// 만약 레코드가 있다면 
+			if(rs.next()) {
+				mBean.setId(rs.getString(1));
+				mBean.setPass1(rs.getString(2));
+				mBean.setEmail(rs.getString(3));
+				mBean.setTel(rs.getString(4));
+				mBean.setHodbby(rs.getString(5));
+				mBean.setJob(rs.getString(6));
+				mBean.setAge(rs.getString(7));
+				mBean.setInfo(rs.getString(8));
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			con.close();
+		}
+		
+		return mBean;
 	}
 }

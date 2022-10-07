@@ -20,7 +20,7 @@
 	
 	<h1>모든 회원 보기</h2>
 	
-	<div style="margin: auto">
+	<div style="display:flex; justify-content:center;">
 		<table width="800" border="1">
 			<tr height="50">
 				<td align="center" width="150"> 아이디</td>
@@ -33,7 +33,9 @@
 					MemberBean bean = arr.get(i);
 			%>
 			<tr height="50">
-				<td align="center" width="150"> <%= bean.getId() %></td>
+				<td align="center" width="150"> 
+					<a href="MemberInfo.jsp?id=<%= bean.getId() %>"><%= bean.getId() %></a>
+				</td>
 				<td align="center" width="250"> <%= bean.getEmail() %></td>
 				<td align="center" width="200"> <%= bean.getTel() %></td>
 				<td align="center" width="2000"><%= bean.getHodbby() %></td>
