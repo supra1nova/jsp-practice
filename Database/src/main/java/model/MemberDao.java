@@ -38,7 +38,7 @@ public class MemberDao {
 			getCon();
 			
 			// 3. 접속후 쿼리 준비해 쿼리를 사용하도록 설정
-			String sql = "insert into jspPractice1.member VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO jspPractice1.member VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -70,7 +70,7 @@ public class MemberDao {
 			getCon();
 			
 			// 쿼리 준비
-			String sql = "Select * from jspPractice1.member";
+			String sql = "SELECT * FROM jspPractice1.member";
 			
 			// 쿼리를 실행시켜주는 객체 선언/정의
 			pstmt = con.prepareStatement(sql);
@@ -111,7 +111,7 @@ public class MemberDao {
 			getCon();
 			
 			// 쿼리 준비
-			String sql = "Select * from jspPractice1.member where id = ?";
+			String sql = "SELECT * FROM jspPractice1.member where id = ?";
 			
 			// 쿼리를 실행시켜주는 객체 선언/정의, 그리고 매핑
 			pstmt = con.prepareStatement(sql);
@@ -139,5 +139,83 @@ public class MemberDao {
 		}
 		
 		return mBean;
+	}
+	
+	// 회원의 패스워드 값을 리턴하는 메서드
+	public String getPass(String id) throws SQLException {
+		String pass = "";
+		
+		try {
+			getCon();
+			
+			String sql = "SELECT pass1 FROM jspPractice1.member WHERE id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				pass = rs.getString(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			con.close();
+		}
+		
+		return pass;
+	}
+	
+
+	// 회원의 패스워드 값을 받아 DB와 체크한 뒤 boolean을 리턴하는 메서드
+	public Boolean checkPass(String id, String pass) throws SQLException {
+		
+		String pass1 = "";
+		
+		try {
+			getCon();
+			
+			String sql = "SELECT pass1 FROM jspPractice1.member WHERE id = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pass1 = rs.getString(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			con.close();
+		}
+		
+		return pass.equals(pass1);
+	}
+	
+	// 회원 정보 수정 메서드
+	public void updateMember(MemberBean mBean) throws SQLException {
+		
+		try {
+			getCon();
+			
+			String sql = "UPDATE jspPractice1.member SET email = ?, tel = ? WHERE id = ? ";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mBean.getEmail());
+			pstmt.setString(2, mBean.getTel());
+			pstmt.setString(3, mBean.getId());
+			
+			// insert, update, delete는 executeUpdate를 사용한다.
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			con.close();
+		}
+		
 	}
 }
