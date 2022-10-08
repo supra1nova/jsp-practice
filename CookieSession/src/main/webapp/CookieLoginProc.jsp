@@ -18,7 +18,7 @@
 		// 쿠키를 사용하기 위해서는 쿠키 클래스를 생성 및 아이디 값을 등록
 		Cookie cookie = new Cookie("id", id);
 		// 쿠키 유효시간 설정
-		cookie.setMaxAge(60*10);	// 10분간 유효
+		cookie.setMaxAge(60*3);	// 10분간 유효
 		// response에 쿠키 값을 저장한다.
 		response.addCookie(cookie);
 		
