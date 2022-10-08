@@ -1,18 +1,22 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 // db 연결 및 select, insert, update, delete 작업을 실행해주는 클래스.
 public class MemberDao {
 	
-	String id = "jspmanager";
-	String pass = "1111";
-	String url = "jdbc:mariadb://localhost:3306/jspPractice1";
+	// 기존 java.sql.Connection를 이용한 DB 접근 방식
+//	String id = "jspmanager";
+//	String pass = "1111";
+//	String url = "jdbc:mariadb://localhost:3306/jspPractice1";
 
 	Connection con;	// DB에 접근할 수 있도록 설정
 	PreparedStatement pstmt;	// DB에서 쿼리를 실행시켜주는 객체
@@ -20,13 +24,35 @@ public class MemberDao {
 	
 	// db에 접근할 수 있도록 도와주는 메서드
 	public void getCon() {
+		
+		// 기존 java.sql.Connection를 이용한 DB 접근 방식 
+//		try {
+//			// 1. DB 선언 - jdbc 드라이버 정의
+//			Class.forName("org.mariadb.jdbc.Driver");
+//			// 2. DB 접속
+//			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/jspPractice1?user=" + id + "&password=" + pass);
+//
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		
+		// 커넥션 풀을 이용해 DB에 접근하는 방식
 		try {
-			// 1. DB 선언 - jdbc 드라이버 정의
-			Class.forName("org.mariadb.jdbc.Driver");
-			// 2. DB 접속
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/jspPractice1?user=" + id + "&password=" + pass);
-
-		} catch(Exception e) {
+			// 외부에서 DB를 읽어야 하므로 컨텍스트설
+			Context initctx = new InitialContext();
+			
+//			// tomcat 서버 내 정보를 담아 놓은 곳으로 이동
+//			Context envctx = (Context)initctx.lookup("java:comp/env");
+//			// datasource 객체를 선언
+//			DataSource ds = (DataSource) envctx.lookup("jdbc_maria");
+			
+			// 위의 2줄과 같은 코드
+			DataSource ds = (DataSource)initctx.lookup("java:comp/env/jdbc_maria");
+			
+			// datasource 를 기준으로 커넥션을 연결
+			con = ds.getConnection();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -58,6 +84,7 @@ public class MemberDao {
 		} catch(Exception e){
 			e.printStackTrace();
 		} finally {
+			pstmt.close();
 			con.close();
 		}
 	}
@@ -97,8 +124,9 @@ public class MemberDao {
 			e.printStackTrace();
 		} finally {
 			// 자원 반납
-			con.close()
-			;
+			rs.close();
+			pstmt.close();
+			con.close();
 		}
 		
 		return arr;
@@ -135,6 +163,8 @@ public class MemberDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
+			rs.close();
+			pstmt.close();
 			con.close();
 		}
 		
@@ -160,6 +190,7 @@ public class MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			pstmt.close();
 			con.close();
 		}
 		
@@ -188,6 +219,8 @@ public class MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			rs.close();
+			pstmt.close();
 			con.close();
 		}
 		
@@ -214,8 +247,26 @@ public class MemberDao {
 			// TODO: handle exception
 			e.printStackTrace();
 		} finally {
+			pstmt.close();
 			con.close();
 		}
 		
+	}
+	
+	// 회원 삭제 메서드
+	public void deleteMember(String id) throws SQLException {
+		try {
+			getCon();
+			
+			String sql = "DELETE FROM jspPractice1.member WHERE ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally { 
+			pstmt.close();
+			con.close();
+		}
 	}
 }

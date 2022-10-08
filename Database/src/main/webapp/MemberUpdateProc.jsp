@@ -17,11 +17,10 @@
 	</jsp:useBean>
 	
 <% 
-	String id = request.getParameter("id");
 	MemberDao mDao = new MemberDao();
 	
 	// 스트링으로 저장된 패스워드를 가져옴
-	Boolean res = mDao.checkPass(id, mBean.getPass1());
+	Boolean res = mDao.checkPass(mBean.getId(), mBean.getPass1());
 	
 	// 수정하기 위해 작성한 패스워드 값과 DB 패스워드 값을 비교
 	if(res){
