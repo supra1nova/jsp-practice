@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -50,8 +51,8 @@ public class BoardDao {
 					+ ")";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getWriter());
-			pstmt.setString(3, bean.getEmail());
-			pstmt.setString(2, bean.getSubject());
+			pstmt.setString(2, bean.getEmail());
+			pstmt.setString(3, bean.getSubject());
 			pstmt.setString(4, bean.getPassword());
 			pstmt.setInt(5, ref);
 			pstmt.setInt(6, re_step);
@@ -68,6 +69,39 @@ public class BoardDao {
 			pstmt.close();
 			con.close();
 		}
+	}
+	
+	public ArrayList<BoardBean> getAllBoard() throws SQLException{
+		ArrayList<BoardBean> bDao = new ArrayList<>();
+		try {
+			getCon();
+			
+			String sql = "SELECT * FROM jspPractice1.board ORDER BY ref desc, re_step asc";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardBean bean = new BoardBean();
+				bean.setNum(rs.getInt(1));
+				bean.setWriter(rs.getString(2));
+				bean.setEmail(rs.getString(3));
+				bean.setSubject(rs.getString(4));
+				bean.setPassword(rs.getString(5));
+				bean.setReg_date(rs.getDate(6).toLocalDate());
+				bean.setRef(rs.getInt(7));
+				bean.setRe_step(rs.getInt(8));
+				bean.setRe_level(rs.getInt(9));
+				bean.setReadcount(rs.getInt(10));
+				bean.setContent(rs.getString(11));
+				bDao.add(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			rs.close();
+			pstmt.close();
+			con.close();
+		}
+		return bDao;
 	}
 }
 

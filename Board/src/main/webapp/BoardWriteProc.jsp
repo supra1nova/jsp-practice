@@ -17,6 +17,8 @@
 <%
 	BoardDao bDao = new BoardDao();
 	bDao.insertBoard(boardBean);
+	
+	response.sendRedirect("BoardList.jsp");
 %>
 
 </body>
