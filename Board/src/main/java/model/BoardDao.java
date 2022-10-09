@@ -71,13 +71,15 @@ public class BoardDao {
 		}
 	}
 	
-	public ArrayList<BoardBean> getAllBoard() throws SQLException{
+	public ArrayList<BoardBean> getAllBoard(int startRow, int pageSize) throws SQLException{
 		ArrayList<BoardBean> bDao = new ArrayList<>();
 		try {
 			getCon();
 			
-			String sql = "SELECT * FROM jspPractice1.board ORDER BY ref desc, re_step asc";
+			String sql = "SELECT * FROM jspPractice1.board ORDER BY ref desc, re_step asc LIMIT ?, ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow-1);
+			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardBean bean = new BoardBean();
@@ -277,5 +279,26 @@ public class BoardDao {
 			pstmt.close();
 			con.close();
 		}
+	}
+	
+	public int getAllCount() throws SQLException {
+		int count = 0;
+		try {
+			getCon();
+			
+			String sql = "SELECT COUNT(*) FROM jspPractice1.board";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			rs.close();
+			pstmt.close();
+			con.close();
+		}
+		return count;
 	}
 }
