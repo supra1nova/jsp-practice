@@ -186,7 +186,7 @@ public class BoardDao {
 		}
 	}
 	
-	// boardUpdate용 단일 게시글 조회
+	// boardUpdate, boardDelete 용 단일 게시글 조회
 	public BoardBean getOneUpdateBoard(int num) throws SQLException {
 		BoardBean bean = new BoardBean();
 		try {
@@ -261,6 +261,21 @@ public class BoardDao {
 			pstmt.close();
 			con.close();
 		}
-		
+	}
+	
+	public void deleteBoard(int num) throws SQLException {
+		try {
+			getCon();
+			
+			String sql = "DELETE FROM jspPractice1.board WHERE num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pstmt.close();
+			con.close();
+		}
 	}
 }
