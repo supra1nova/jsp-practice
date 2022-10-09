@@ -103,5 +103,46 @@ public class BoardDao {
 		}
 		return bDao;
 	}
+	
+	public BoardBean getOneBoard(int num) throws SQLException {
+		BoardBean bean = new BoardBean();
+		try {
+			getCon();
+			
+			// 조회수 증가
+			String readsql = "UPDATE jspPractice1.board SET readcount = readcount+1 WHERE num = ?";
+			pstmt = con.prepareStatement(readsql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+			// 게시글 데이터 조회 
+			String sql = "SELECT * FROM jspPractice1.board WHERE num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bean.setNum(rs.getInt(1));
+				bean.setWriter(rs.getString(2));
+				bean.setEmail(rs.getString(3));
+				bean.setSubject(rs.getString(4));
+				bean.setPassword(rs.getString(5));
+				bean.setReg_date(rs.getDate(6).toLocalDate());
+				bean.setRef(rs.getInt(7));
+				bean.setRe_step(rs.getInt(8));
+				bean.setRe_level(rs.getInt(9));
+				bean.setReadcount(rs.getInt(10));
+				bean.setContent(rs.getString(11));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			rs.close();
+			pstmt.close();
+			con.close();
+		}
+		
+		return bean;
+	}
 }
 
