@@ -14,7 +14,7 @@
 %>
 
 <h1 style="text-align: center"> 게시글 보기</h1>
-<div style="disply: flex; justify-content: center">
+<div style="display: flex; justify-content: center">
 	<table width="600" border="1" bgcolor="beige">
 		<tr height="40">
 			<td align="center" width="120"> 글 번호</td>
