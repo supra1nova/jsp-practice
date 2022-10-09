@@ -144,5 +144,47 @@ public class BoardDao {
 		
 		return bean;
 	}
+	
+	public void reWriteBoard(BoardBean bean) throws SQLException {
+		// 부모 글그룹과 글레벨, 글스텝을 읽어온다.
+		int ref = bean.getRef();
+		int re_step = bean.getRe_step();
+		int re_level = bean.getRe_level();
+		
+		try {
+			getCon();
+			
+			// 부모 글보다 큰 re_level의 값을 모두 1씩 증가시킨다.
+			String levelSql = "UPDATE jspPractice1.board SET re_level = re_level + 1 WHERE ref = ? and re_level > ? ";
+			pstmt = con.prepareStatement(levelSql);
+			pstmt.setInt(1, ref);
+			pstmt.setInt(2, re_level);
+			pstmt.executeUpdate();
+			
+			// 답변 글 데이터를 저장
+			String sql = "INSERT INTO jspPractice1.board("
+					+ "writer, email, subject, password, reg_date, ref, re_step, re_level, readcount, content"
+					+ ") VALUES("
+					+ "?, ?, ?, ?, CURDATE(), ?, ?, ?, 0, ?"
+					+ ")";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getWriter());
+			pstmt.setString(2, bean.getEmail());
+			pstmt.setString(3, bean.getSubject());
+			pstmt.setString(4, bean.getPassword());
+			pstmt.setInt(5, ref);
+			pstmt.setInt(6, re_step + 1);
+			pstmt.setInt(7, re_level + 1);
+			pstmt.setString(8, bean.getContent());
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			pstmt.close();
+			con.close();
+		}
+	}
 }
 
