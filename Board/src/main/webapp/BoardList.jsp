@@ -49,7 +49,7 @@
 		</tr>
 		<tr height="40">
 			<td width="50" align="center"> 번호</td>
-			<td width="320" align="center"> 제목</td>
+			<td width="320" align="center""> 제목</td>
 			<td width="100" align="center"> 작성자</td>
 			<td width="150" align="center"> 작성일</td>
 			<td width="80" align="center"> 조회수</td>
@@ -61,10 +61,10 @@
 %>
 		<tr bgcolor="white">
 			<td width="50" align="center"> <%= number-- %> </td>
-			<td width="50" align="left"> <a href="BoardInfo.jsp?num=<%= bean.getNum() %>" style="text-decoration: none; color: black">
+			<td width="50" align="left"> <a href="BoardInfo.jsp?num=<%= bean.getNum() %>" style="text-decoration: none; color: black; padding: 5px">
 			<%
 				if(bean.getRe_step() > 1){
-					for(int j = 0 ; j < (bean.getRe_step()-1) * 5 ; j++ ){
+					for(int j = 0 ; j < (bean.getRe_step()-1) * 2 ; j++ ){
 			%>
 						&nbsp;
 			<%
@@ -82,47 +82,65 @@
 	
 	</table>
 </div>
-<div style="display: flex; justify-content: center">
+<div style="display: flex; justify-content: center; text-decoration: none; color: black">
 	<p>
 		<% 
 			if(count >0){
+				int gap = 5;
+				
 				// 전체 페이지를 구해본다.
 				int pageCount = count/pageSize+(count%pageSize == 0 ? 0 : 1); // 카운터링 숫자를 얼마까지 보여줄 것인지 결정
 				
 				// 시작 페이지 숫자를 설정한다.
 				int startPage=1;
-				if(currentPage % 10 != 0){
+				/* if(currentPage % gap != 0){
 					startPage = (int)(currentPage/10)*10+1;
 				} else {
 					startPage = (int)((currentPage/10)-1)*10+1;
+				} */
+				if(currentPage % gap != 0){
+					startPage = (int)(currentPage/gap)*gap+1;
+				} else {
+					startPage = (int)((currentPage/gap)-1)*gap+1;
 				}
+
 				
 				// 마지막 페이지 숫자를 설정한다.
-				int pageBlock=10; // 카운터링 처리숫자
+				/* int pageBlock=10; // 카운터링 처리숫자 */
+				int pageBlock=gap; // 카운터링 처리숫자
 				int endPage = startPage+pageBlock-1;	// 화면에 보여질 페이지의 마지막 숫자
 				
 				// 마지막 페이지(endPage) 설정
 				if(endPage > pageCount) endPage = pageCount;
 				
 				// 이전 링크 생성 함수
-				if(startPage > 10){
+				/* if(startPage > 10){ */
+				if(startPage > gap){
 				
 		%>
-					<a href="BoardList.jsp?pageNum=<%= startPage-10 %>"> [이전] </a>
+					<%-- <a href="BoardList.jsp?pageNum=<%= startPage-10 %>"> [이전] </a> --%>
+					<a style="text-decoration: none; color: black" href="BoardList.jsp?pageNum=<%= startPage - gap %>"> [이전] </a>
 		<%
 				}
 				
 				// 페이징 처리
 				for(int i = startPage; i <= endPage; i++){
+					if(i == currentPage){
 		%>
-					<a href="BoardList.jsp?pageNum=<%= i %>">&nbsp;<%= i %>&nbsp;</a>
+					<a style="text-decoration: none; color: black; font-weight: 900" href="BoardList.jsp?pageNum=<%= i %>">&nbsp;<%= i %>&nbsp;</a>
+		<%
+						continue;
+					}
+		%>
+					<a style="text-decoration: none; color: black" href="BoardList.jsp?pageNum=<%= i %>">&nbsp;<%= i %>&nbsp;</a>
 		<%
 				}
 				
 				// 다음 링크 생성 함수
 				if(endPage < pageCount){
 		%>
-					<a href="BoardList.jsp?pageNum=<%= startPage + 10 %>">&nbsp;[다음]&nbsp;</a>
+					<%-- <a href="BoardList.jsp?pageNum=<%= startPage + 10 %>">&nbsp;[다음]&nbsp;</a> --%>
+					<a style="text-decoration: none; color: black" href="BoardList.jsp?pageNum=<%= startPage + gap %>">&nbsp;[다음]&nbsp;</a>
 		<%
 				}
 			}
