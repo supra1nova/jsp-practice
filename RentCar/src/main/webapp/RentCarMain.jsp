@@ -9,7 +9,7 @@
 <body>
 
 	<%
-		String center = request.getParameter("Center");
+		String center = request.getParameter("center");
 		// 처음 실행시 null처리
 		if(center == null){
 			center = "Center.jsp";	// default center를 부여
