@@ -31,7 +31,7 @@
 			for(CarListBean car : cars){
 		%>
 			<td width="333" align="center">
-				<a href="CarReserveInfo.jsp?no=<%= car.getNo()%>">
+				<a href="RentCarMain.jsp?center=CarReserveInfo.jsp?no=<%= car.getNo()%>">
 					<img alt="<%= car.getName() %>" src="img/<%= car.getImg() %>" width="300" height="200">
 				</a>
 				<p><%= car.getName() %></p>

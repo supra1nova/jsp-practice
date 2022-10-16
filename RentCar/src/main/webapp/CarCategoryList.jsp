@@ -32,7 +32,7 @@
 			}
 		%> 
 			<td width="333" align="center">
-				<a href="RentcarMain.jsp?center=CarReserveInfo.jsp?no=<%= bean.getNo()%>">
+				<a href="RentCarMain.jsp?center=CarReserveInfo.jsp?no=<%= bean.getNo()%>">
 					<img alt=" <%= bean.getName() %>" src="img/<%= bean.getImg() %>" width="300" height="200">
 				</a>
 				<p>

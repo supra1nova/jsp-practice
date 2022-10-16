@@ -12,7 +12,7 @@
 	ArrayList<CarListBean> cars = rDao.getAllCars();
 %>
 
-<div text-align="center">
+<div align="center">
 	<table width="1000">
 		<tr height="60">
 			<td align="center" colspan="3">

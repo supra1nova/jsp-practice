@@ -21,21 +21,31 @@
 			</td>
 			<td colspan="4" />
 			<td align="center"; height: "200">
-				<%= id %> 님 반갑습니다.
+				<%= id %> 님
+				<%
+					if(id.equals("GUEST")){
+				%>
+				<button onClick="location.href='RentCarMain.jsp?center=MemberLogin.jsp'"> 로그인</button>
+				<%
+					} else {
+				%>
+				<button onClick="location.href='RentCarMain.jsp?center=MemberLogout.jsp'">로그아웃</button>
+				<% 
+					} 
+				%>
 			</td>
 		</tr>
 		<tr height="50">
 			<td align="center" width="166.5" bgcolor="grey" id="td" onClick="location.href='RentCarMain.jsp'" style="cursor: pointer">
-				<!-- <a href="RentCarMain.jsp" style="text-decoration: none; color: white; font-size: 20px;"> 메    인 </a> -->
 				<span style="color: white; font-size: 20px"> 메    인 </span>
 			</td>
 			<td align="center" width="166.5" bgcolor="grey" onClick="location.href='RentCarMain.jsp?center=CarReservation.jsp'" style="cursor: pointer">
 				<span style="color: white; font-size: 20px;">예 약 하 기</span>
 			</td>	
-			<td align="center" width="166.5" bgcolor="grey" onClick="location.href=''" style="cursor: pointer">
+			<td align="center" width="166.5" bgcolor="grey" onClick="location.href='RentCarMain.jsp?center=CarReservationView.jsp'" style="cursor: pointer">
 				<span style="color: white; font-size: 20px;">예 약 확 인</span>
 			</td>
-			<td align="center" width="166.5" bgcolor="grey" onClick="location.href=''" style="cursor: pointer">
+			<td align="center" width="166.5" bgcolor="grey" onClick="location.href='RentCarMain.jsp?center=BoardList.jsp'" style="cursor: pointer">
 				<span style="color: white; font-size: 20px;">자유 게시판</span>
 			</td>
 			<td align="center" width="166.5" bgcolor="grey" onClick="location.href=''" style="cursor: pointer">
