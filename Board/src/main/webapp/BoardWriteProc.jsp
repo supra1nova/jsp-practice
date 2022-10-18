@@ -6,7 +6,7 @@
 <body>
 
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 %>
 
 <!-- 게시글 작성한 데이터를 한번에 읽어온다(mapping) by useBean, setProperty -->

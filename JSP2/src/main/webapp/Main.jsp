@@ -7,7 +7,8 @@
 <div style="text-align:center">
 
 	<table border="1" width="800">
-		<tr width="150">
+		<!-- <tr width="150"> -->
+		<tr>
 			<td align="center" colspan="2">
 				<jsp:include page="Top.jsp">
 					<jsp:param value="aaa" name="id"/>

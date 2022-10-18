@@ -31,6 +31,10 @@
 				<td align="left" colspan="3"><input type="password" name="password" id="password" size="67"></td>
 			</tr>
 			<tr height="40">
+				<td width="120" align="center"> 내용</td>
+				<td align="left" colspan="3"> <%= bean.getContent() %></td>
+			</tr>
+			<tr height="40">
 				<td colspan="4" align="center">
 					<input type="hidden" name="num" value="<%= num %>">
 					<input type="submit" value="삭제">

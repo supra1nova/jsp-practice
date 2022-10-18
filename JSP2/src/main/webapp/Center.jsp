@@ -4,14 +4,16 @@
 <html>
 <body>
 
-<div style="text-align:center">
-	<table width="600">
-		<tr height="400">
+<div style="text-align:center; display: felx; justify-content: center">
+	<img alt="image" src="img/auto.jpeg" width="500" height="350">
+	
+	<!-- <table>
+		<tr>
 			<td align="center">
 				<img alt="image" src="img/auto.jpeg" width="500" height="350">
 			</td>
 		</tr>
-	</table>
+	</table> -->
 </div>
 
 </body>

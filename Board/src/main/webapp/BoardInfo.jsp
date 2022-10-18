@@ -34,13 +34,13 @@
 		</tr>
 		<tr height="40">
 			<td align="center" width="120"> 제목</td>
-			<td align="center" colspan="3"> <%= bean.getSubject() %></td>
+			<td align="left" colspan="3" style="padding: 5px"> <%= bean.getSubject() %></td>
 		</tr>
 		<tr height="80">
 			<td align="center" width="120"> 글내용</td>
-			<td align="center" colspan="3"> <%= bean.getContent() %></td>
+			<td align="left" colspan="3" style="padding: 5px"> <%= bean.getContent() %></td>
 		</tr>
-		<tr height="80">
+		<tr height="40">
 			<td align="center" colspan="4"> 
 			<input type="button" value="답글쓰기" 
 			onclick="location.href='BoardReWriteForm.jsp?num=<%= bean.getNum()%>'">
