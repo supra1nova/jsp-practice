@@ -1,5 +1,6 @@
-<%@page import="model.BoardBean"%>
-<%@page import="model.BoardDao"%>
+<%@page import="dao.MemberDao"%>
+<%@page import="dto.BoardBean"%>
+<%@page import="dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,6 +11,7 @@
 	int num = Integer.valueOf(request.getParameter("num").trim());
 
 	BoardDao bDao = new BoardDao();
+	MemberDao mDao = new MemberDao();
 	BoardBean bean = bDao.getOneBoard(num);
 %>
 
@@ -42,17 +44,27 @@
 		</tr>
 		<tr height="40">
 			<td align="center" colspan="4"> 
-			<input type="button" value="답글쓰기" 
-			onclick="location.href='RentCarMain.jsp?center=BoardReWriteForm.jsp?num=<%= bean.getNum()%>'">
-			&nbsp;&nbsp;
-			<input type="button" value="수정하기"
-			onclick="location.href='RentCarMain.jsp?center=BoardUpdateForm.jsp?num=<%= bean.getNum()%>'">
-			&nbsp;&nbsp;
-			<input type="button" value="삭제하기"
-			onclick="location.href='RentCarMain.jsp?center=BoardDeleteForm.jsp?num=<%= bean.getNum()%>'">
-			&nbsp;&nbsp;
-			<input type="button" value="목록보기"
-			onclick="location.href='RentCarMain.jsp?center=BoardList.jsp'">
+<%
+				if( session.getAttribute("id") != null && !(bean.getEmail().equals(mDao.getMemberEmail(String.valueOf(session.getAttribute("id"))))) ){
+%>
+					<input type="button" value="답글쓰기" 
+					onclick="location.href='RentCarMain.jsp?center=BoardReWriteForm.jsp?num=<%= bean.getNum()%>'">
+					
+<%
+				} else if(session.getAttribute("id") != null && ( bean.getEmail().equals(mDao.getMemberEmail(String.valueOf(session.getAttribute("id"))))) && ( bean.getWriter().equals(session.getAttribute("id")))) {
+%>
+					&nbsp;&nbsp;
+					<input type="button" value="수정하기"
+					onclick="location.href='RentCarMain.jsp?center=BoardUpdateForm.jsp?num=<%= bean.getNum()%>'">
+					&nbsp;&nbsp;
+					<input type="button" value="삭제하기"
+					onclick="location.href='RentCarMain.jsp?center=BoardDeleteForm.jsp?num=<%= bean.getNum()%>'">
+<%
+				}
+%>
+				&nbsp;&nbsp;
+				<input type="button" value="목록보기"
+				onclick="location.href='RentCarMain.jsp?center=BoardList.jsp'">
 			</td>
 		</tr>
 	</table>

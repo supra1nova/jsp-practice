@@ -1,5 +1,5 @@
-<%@page import="model.BoardBean"%>
-<%@page import="model.BoardDao"%>
+<%@page import="dto.BoardBean"%>
+<%@page import="dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

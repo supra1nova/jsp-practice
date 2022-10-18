@@ -19,7 +19,7 @@
 		<tr height="40"> 
 			<td width="120" align="center" onClick="document.getElementById('pass1').focus()">패스워드</td>
 			<td width="180" align="center">
-				<input type="password" name="pass1" id="pass1" size="15">
+				<input type="password" name="pass1" id="pass1" size="15" autoComplete="off">
 			</td>
 		</tr>
 		<tr height="40"> 

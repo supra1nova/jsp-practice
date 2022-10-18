@@ -1,6 +1,6 @@
 <%@page import="java.text.NumberFormat"%>
-<%@page import="db.CarListBean"%>
-<%@page import="db.RentCarDao"%>
+<%@page import="dto.CarListBean"%>
+<%@page import="dao.RentCarDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,10 +10,10 @@
 <body>
 
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 %>
 
-<jsp:useBean id="rBean" class="db.CarReserveBean">
+<jsp:useBean id="rBean" class="dto.CarReserveBean">
 	<jsp:setProperty name="rBean" property="*" />
 </jsp:useBean>
 
@@ -50,10 +50,9 @@
 		int carPrice = cBean.getPrice() * rBean.getQty() * rBean.getDuration();
 		
 		int assurance = rBean.getAssurance() == 1 ? 10000 : 0;
-		int navigation = rBean.getNavigation() == 1 ? 10000 : 0;
+		int babySeat = rBean.getBaby_seat() == 1 ? 10000 : 0;
 		int wifi = rBean.getWifi() == 1 ? 10000 : 0;
-		int optionPrice = (assurance+navigation + wifi) * rBean.getQty() * rBean.getDuration();
-	
+		int optionPrice = (assurance + babySeat + wifi) * rBean.getQty() * rBean.getDuration();
 		int totalPrice = carPrice + optionPrice;
 %>
 

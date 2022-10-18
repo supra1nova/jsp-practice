@@ -1,6 +1,6 @@
-<%@page import="db.CarListBean"%>
+<%@page import="dto.CarListBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="db.RentCarDao"%>
+<%@page import="dao.RentCarDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -1,5 +1,6 @@
-<%@page import="model.BoardDao"%>
-<%@page import="model.BoardBean"%>
+<%@page import="dao.MemberDao"%>
+<%@page import="dao.BoardDao"%>
+<%@page import="dto.BoardBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,6 +13,7 @@
 	BoardBean prevBean = new BoardBean();
 	BoardDao bDao = new BoardDao();
 	prevBean = bDao.getOneBoard(num);
+	MemberDao mDao = new MemberDao();
 	
 	String prevTitle = prevBean.getSubject(); 
 	int ref = prevBean.getRef();
@@ -25,20 +27,20 @@
 	<form action="BoardReWriteProc.jsp" method="POST">
 		<table width="600" border="1" bordercolor="gray" bgcolor="beige">
 			 <tr height="40">
-				<td align="center" width="150"> <label for="writer">작성자</label></td>
-				<td width="450"> <input type="text" name="writer" id="writer" size="60"></td>
+				<td align="center" width="150"> 작성자</td>
+				<td width="450"> <input type="text" name="writer" id="writer" size="60" value="<%= String.valueOf(session.getAttribute("id")) %>" readOnly style="background-color: lightgrey;"></td>
 			</tr>
 			<tr height="40">
 				<td align="center" width="150"> <label for="subject">제목</label></td>
 				<td width="450"> <input type="text" name="subject" id="subject" size="60" value="re: <%= prevTitle %> "></td>
 			</tr>
 			<tr height="40">
-				<td align="center" width="150"> <label for="email">이메일</label></td>
-				<td width="450"> <input type="email" name="email" id="email" size="60" ></td>
+				<td align="center" width="150"> 이메일</td>
+				<td width="450"> <input type="email" name="email" id="email" size="60" value="<%= mDao.getMemberEmail(String.valueOf(session.getAttribute("id"))) %>" readOnly style="background-color: lightgrey;"></td>
 			</tr>
 			<tr height="40">
 				<td align="center" width="150"> <label for="password">비밀번호</label></td>
-				<td width="450"> <input type="password" name="password" id="password" size="60" ></td>
+				<td width="450"> <input type="password" name="password" id="password" size="60"  oninvalid="alert('비밀번호를 입력해 주세요!')" required autoComplete="off"></td>
 			</tr>
 			<tr height="40">
 				<td align="center" width="150"> <label for="content">글내용</label></td>
@@ -53,9 +55,11 @@
 					<input type="hidden" name="re_level" value=<%= re_level %>>
 					<input type="submit" value="저장">
 					&nbsp;&nbsp;
-					<input type="reset" value="취소">
+					<input type="reset" value="다시 작성">
 					&nbsp;&nbsp;
-					<input type="button" value="전체글보기" onclick="location.href='RentCarMain.jsp?center=BoardList.jsp'">
+					<input type="button" value="작성 취소" onclick="history.go(-1)">
+					&nbsp;&nbsp;
+					<input type="button" value="전체 글보기" onclick="location.href='RentCarMain.jsp?center=BoardList.jsp'">
 				</td>
 			</tr>
 		</table>

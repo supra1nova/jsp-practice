@@ -1,4 +1,6 @@
-<%@page import="db.RentCarDao"%>
+<%@page import="dto.MemberBean"%>
+<%@page import="dao.MemberDao"%>
+<%@page import="dao.RentCarDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,7 +23,14 @@
 <%
 	} else {
 		session.setAttribute("id", id);
-		response.sendRedirect("RentCarMain.jsp");
+		MemberDao mDao = new MemberDao();
+		MemberBean mBean = mDao.oneSelectMember(id);
+		Boolean result = mBean.getType().equals("a");
+		if(result) {
+			response.sendRedirect("RentCarMain.jsp?center=Admin.jsp");
+		} else { 
+			response.sendRedirect("RentCarMain.jsp");
+		}
 	}
 %>
 </body>

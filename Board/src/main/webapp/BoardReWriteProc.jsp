@@ -6,7 +6,7 @@
 <body>
 
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 %>
 
 <jsp:useBean id="bBean" class="model.BoardBean">

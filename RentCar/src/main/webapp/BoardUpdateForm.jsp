@@ -1,5 +1,5 @@
-<%@page import="model.BoardDao"%>
-<%@page import="model.BoardBean"%>
+<%@page import="dao.BoardDao"%>
+<%@page import="dto.BoardBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@
 			</tr>
 			<tr height="40">
 				<td width="120" align="center"> <label for="password">패스워드</label></td>
-				<td width="480" colspan="3" align="center"> <input type="password" name="password" id="password" size="67"></td>
+				<td width="480" colspan="3" align="center"> <input type="password" name="password" id="password" size="67" oninvalid="alert('비밀번호를 입력해 주세요!')" required></td>
 			</tr>
 			<tr height="40">
 				<td width="120" align="center"> <label for="content">글내용</label></td>

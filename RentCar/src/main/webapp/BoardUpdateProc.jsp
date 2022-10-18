@@ -1,5 +1,5 @@
-<%@page import="model.BoardBean"%>
-<%@page import="model.BoardDao"%>
+<%@page import="dto.BoardBean"%>
+<%@page import="dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,10 +7,10 @@
 <body>
 
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 %>
 
-<jsp:useBean id="bean" class="model.BoardBean">
+<jsp:useBean id="bean" class="dto.BoardBean">
 	<jsp:setProperty name="bean" property="*" />
 </jsp:useBean>
 

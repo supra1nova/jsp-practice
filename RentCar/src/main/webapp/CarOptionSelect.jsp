@@ -1,5 +1,5 @@
-<%@page import="db.CarListBean"%>
-<%@page import="db.RentCarDao"%>
+<%@page import="dto.CarListBean"%>
+<%@page import="dao.RentCarDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -73,7 +73,7 @@
 		<tr>
 			<td width="250" align="center"> 베이비시트</td>
 			<td width="250" align="center">
-				<select name="babySeat">
+				<select name="baby_seat">
 					<option value="1" >적용 (1일 1만원)</option>
 					<option value="0" >비적용</option>
 				</select>

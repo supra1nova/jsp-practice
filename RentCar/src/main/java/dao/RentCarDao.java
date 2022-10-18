@@ -1,4 +1,4 @@
-package db;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import dto.CarListBean;
+import dto.CarReserveBean;
+import dto.CarViewBean;
 
 public class RentCarDao {
 	
@@ -196,8 +200,9 @@ public class RentCarDao {
 		ArrayList<CarViewBean> carReservationList = new ArrayList<>();
 		getCon();
 		try {
-			String sql = "SELECT * FROM jspPractice1.reservation_list"
-					+ " WHERE date > NOW() AND id=?";
+//			String sql = "SELECT * FROM jspPractice1.RentCar NATURAL JOIN jspPractice1.car_reserve"
+			String sql = "SELECT * FROM jspPractice1.reservation_list_test"
+					+ " WHERE id=? ORDER BY date ASC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -223,5 +228,21 @@ public class RentCarDao {
 			con.close();
 		}
 		return carReservationList;
+	}
+	
+	public void removeReservation(String id, String date) throws SQLException {
+		getCon();
+		try {
+			String sql = "DELETE FROM jspPractice1.car_reserve WHERE id = ? AND date = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, date);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pstmt.close();
+			con.close();
+		}
 	}
 }

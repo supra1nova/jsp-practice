@@ -1,11 +1,11 @@
-<%@page import="model.BoardDao"%>
+<%@page import="dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <body>
 
-<jsp:useBean id="bean" class="model.BoardBean">
+<jsp:useBean id="bean" class="dto.BoardBean">
 	<jsp:setProperty name="bean" property="*" />
 </jsp:useBean>
 

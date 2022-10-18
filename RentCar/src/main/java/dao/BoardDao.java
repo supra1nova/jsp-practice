@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import dto.BoardBean;
 
 public class BoardDao {
 	

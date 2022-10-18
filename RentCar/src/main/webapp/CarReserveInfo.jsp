@@ -1,6 +1,7 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="db.CarListBean"%>
-<%@page import="db.RentCarDao"%>
+<%@page import="dto.CarListBean"%>
+<%@page import="dao.RentCarDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,6 +16,7 @@
 	int category = car.getCategory();
 	ArrayList<CarListBean> cars = rDao.getCategoryCars(category);
 	String type = category == 1 ? "소형" : (category == 2 ? "중형" : "대형");
+	NumberFormat numberFormat = NumberFormat.getInstance();
 %>
 <div align="center">
 	<form action="RentCarMain.jsp?center=CarOptionSelect.jsp" method="POST">
@@ -51,8 +53,8 @@
 				<td width="250" align="center"> <%= type %></td>
 			</tr>
 			<tr>
-				<td width="250" align="center"> 대여가격</td>
-				<td width="250" align="center"> <%= car.getPrice() %></td>
+				<td width="250" align="center"> 대여가격 (1대/1일)</td>
+				<td width="250" align="center"> <%= numberFormat.format(car.getPrice()) %> 원</td>
 			</tr>
 			<tr>
 				<td width="250" align="center"> 제조사</td>
