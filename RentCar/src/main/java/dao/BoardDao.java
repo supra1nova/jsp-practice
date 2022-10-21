@@ -226,6 +226,7 @@ public class BoardDao {
 		return bean;
 	}
 	
+	// 패스워드 확인
 	public Boolean checkPass(int num, String pass) throws SQLException {
 		Boolean res = false;
 		try {
@@ -249,6 +250,7 @@ public class BoardDao {
 		return res;
 	}
 	
+	// 게시글 수정(업데이트)
 	public void updateBoard(BoardBean bean) throws SQLException {
 		try {
 			getCon();
@@ -267,6 +269,7 @@ public class BoardDao {
 		}
 	}
 	
+	// 게시글 삭제
 	public void deleteBoard(int num) throws SQLException {
 		try {
 			getCon();
