@@ -26,6 +26,21 @@
 		</table>
 	</form>
 </div>
-
 </body>
+<script type="text/javascript">
+const idLabel = document.querySelector("#idLabel");
+const id = document.querySelector("#id");
+const passwordLabel = document.querySelector("#passwordLabel");
+const password = document.querySelector("#password");
+
+idLabel.addEventListener("click", focusOnToIdInput);
+function focusOnToIdInput(){
+	id.focus();
+}
+
+passwordLabel.addEventListener("click", focusOnToPasswordInput);
+function focusOnToPasswordInput(){
+	password.focus();
+}
+</script>
 </html>
