@@ -7,7 +7,7 @@
 <body>
 
 <%
-	int num = Integer.valueOf(request.getParameter("num"));
+int num = Integer.valueOf(request.getParameter("num"));
 
 	BoardBean prevBean = new BoardBean();
 	BoardDao bDao = new BoardDao();
@@ -17,7 +17,6 @@
 	int ref = prevBean.getRef();
 	int re_step = prevBean.getRe_step();
 	int re_level = prevBean.getRe_level();
-	
 %>
 
 <h2 style="text-align: center">답변글 입력하기</h2>

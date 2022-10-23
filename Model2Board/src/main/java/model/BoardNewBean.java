@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class BoardBean {
+public class BoardNewBean {
 	private Integer num;
 	private String writer;
 	private String email;

@@ -12,7 +12,7 @@
 <div style="display: flex; justify-content: center; margin-bottom: 10px">
 
 <%
-	BoardDao bDao = new BoardDao();
+BoardDao bDao = new BoardDao();
 	
 
 	// 화면에 보여질 게시글의 갯수 설정
@@ -56,9 +56,9 @@
 		</tr>		
 
 <%
-	for(int i=0; i<arr.size(); i++){
-		BoardBean bean = arr.get(i);
-%>
+		for(int i=0; i<arr.size(); i++){
+				BoardBean bean = arr.get(i);
+		%>
 		<tr bgcolor="white">
 			<td width="50" align="center"> <%= number-- %> </td>
 			<td width="50" align="left"> <a href="BoardInfo.jsp?num=<%= bean.getNum() %>" style="text-decoration: none; color: black; padding: 5px">
