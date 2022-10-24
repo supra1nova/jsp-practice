@@ -7,6 +7,14 @@
 <html>
 <body>
 
+<!-- 업데이트를 진행하면 code 값이 발행되며, 이 값이 400이면 비밀번호가 맞지 않는다는 뜻. 수정 화면으로 돌아간다. -->
+<c:if test="${code == 400}" >
+	<script>
+		alert("비밀번호가 틀렸습니다.")
+		history.go(-1);
+	</script>
+</c:if>
+
 <h1 style="text-align: center"> 게시글 보기</h1>
 <div style="display: flex; justify-content: center">
 	<table width="600" border="1" bgcolor="beige">

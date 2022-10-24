@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.BoardNewBean;
 import model.BoardNewDao;
 
-@WebServlet("/BoardInfoController")
-public class BoardInfoController extends HttpServlet {
-	
+@WebServlet("/BoardUpdateProcController")
+public class BoardUpdateProcController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		reqPro(req, resp);
@@ -26,18 +24,24 @@ public class BoardInfoController extends HttpServlet {
 	}
 	
 	protected void reqPro(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int num = Integer.valueOf(req.getParameter("num"));
-		BoardNewDao bDao = new BoardNewDao();
-		BoardNewBean bBean = bDao.getArticle(num);
-
-		// 업데이트 진행시 code가 발생되는데, code 값이 비어있으면 그냥 무시, 존재한다면 attribute에 추가
-		String code = req.getAttribute("code") != null ? (String)req.getAttribute("code") : null;
-		if(code != null) {
-			req.setAttribute("code", code);
-		}
+		req.setCharacterEncoding("UTF-8");
 		
-		req.setAttribute("bBean", bBean);
-		RequestDispatcher rd = req.getRequestDispatcher("BoardInfo.jsp");
+		int num = Integer.valueOf(req.getParameter("num"));
+		String subject = req.getParameter("subject");
+		String password = req.getParameter("password");
+		String content = req.getParameter("content");
+		
+		BoardNewDao bDao = new BoardNewDao();
+		Boolean res = bDao.checkPassword(num, password);
+		
+		// 비밀번호가 일치할 시 업데이트 후 200 번 코드 전달 or 업데이트 하지 않고 400 코드 전 
+		if(res) {
+			bDao.updateArticle(subject, content, num);
+			req.setAttribute("code", "200");
+		} else {
+			req.setAttribute("code", "400");
+		}
+		RequestDispatcher rd = req.getRequestDispatcher("BoardInfoController?num=" + num);
 		rd.forward(req, resp);
 	}
 }
