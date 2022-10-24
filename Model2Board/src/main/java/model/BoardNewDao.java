@@ -115,4 +115,56 @@ public class BoardNewDao {
 		}
 		return bArr;
 	}
+	
+	public void insertArticle(BoardNewBean bBean) {
+		getCon();
+		try {
+			int ref = 0;
+			int re_step = 1;
+			int re_level = 1;
+			
+			String sql = "SELECT MAX(ref) FROM jspPractice1.board";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				ref = rs.getInt(1) + 1;
+			}
+			
+			sql = "INSERT INTO jspPractice1.board(writer, email, subject, password, reg_date, ref, re_step, re_level, readcount, content) "
+					+ " VALUES( ?, ?, ?, ?, CURDATE(), ?, ?, ?, 0, ?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bBean.getWriter());
+			pstmt.setString(2, bBean.getEmail());
+			pstmt.setString(3, bBean.getSubject());
+			pstmt.setString(4, bBean.getPassword());
+			pstmt.setInt(5, ref);
+			pstmt.setInt(6, re_step);
+			pstmt.setInt(7, re_level);
+			pstmt.setString(8, bBean.getContent());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			if(pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			if(con != null)
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}
 }

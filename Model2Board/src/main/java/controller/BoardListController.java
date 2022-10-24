@@ -45,7 +45,7 @@ public class BoardListController extends HttpServlet{
 		// 현재 페이지 문자를 숫자로 형변환
 		int currentPage = Integer.parseInt(pageNum);
 		
-		// 전체 게시글의 갯수를 가져와야 하기에 db 객체 생성
+		// 전체 게시글의 갯수를 가져와야 하기에 dao 객체 생성
 		BoardNewDao bDao = new BoardNewDao();
 		allCount = bDao.getAllCount();
 		
