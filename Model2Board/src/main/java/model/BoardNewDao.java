@@ -167,4 +167,58 @@ public class BoardNewDao {
 				}
 		}
 	}
+	
+	public BoardNewBean getArticle(int num) {
+		BoardNewBean bBean = null;
+		getCon();
+		try {
+			String sql = "UPDATE jspPractice1.board SET readcount = readcount + 1 WHERE num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+			sql = "SELECT * FROM jspPractice1.board WHERE num = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				bBean = new BoardNewBean();
+				bBean.setNum(rs.getInt(1));
+				bBean.setWriter(rs.getString(2));
+				bBean.setEmail(rs.getString(3));
+				bBean.setSubject(rs.getString(4));
+				bBean.setPassword(rs.getString(5));
+				bBean.setReg_date(rs.getDate(6).toLocalDate());
+				bBean.setRef(rs.getInt(7));
+				bBean.setRe_step(rs.getInt(8));
+				bBean.setRe_level(rs.getInt(9));
+				bBean.setReadcount(rs.getInt(10));
+				bBean.setContent(rs.getString(11));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			if(pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			if(con != null)
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		return bBean;
+	}
 }
