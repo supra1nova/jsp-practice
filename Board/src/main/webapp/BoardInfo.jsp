@@ -7,7 +7,7 @@
 <body>
 
 <%
-	int num = Integer.valueOf(request.getParameter("num").trim());
+int num = Integer.valueOf(request.getParameter("num").trim());
 
 	BoardDao bDao = new BoardDao();
 	BoardBean bean = bDao.getOneBoard(num);

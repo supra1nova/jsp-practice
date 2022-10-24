@@ -10,7 +10,7 @@
 </jsp:useBean>
 
 <%
-	String password = request.getParameter("password");
+String password = request.getParameter("password");
 	int num = Integer.valueOf(request.getParameter("num").trim());
 	BoardDao bDao = new BoardDao();
 	Boolean res = bDao.checkPass(num, password);

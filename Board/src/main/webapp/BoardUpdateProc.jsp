@@ -15,7 +15,7 @@ request.setCharacterEncoding("UTF-8");
 </jsp:useBean>
 
 <%
-	BoardDao bDao = new BoardDao();
+BoardDao bDao = new BoardDao();
 	Boolean checkPass = bDao.checkPass(bean.getNum(), bean.getPassword());
 	if(checkPass){
 		bDao.updateBoard(bean);

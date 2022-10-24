@@ -15,7 +15,7 @@ request.setCharacterEncoding("UTF-8");
 </jsp:useBean>
 
 <%
-	BoardDao bDao = new BoardDao();
+BoardDao bDao = new BoardDao();
 	bDao.insertBoard(bBean);
 	
 	response.sendRedirect("BoardList.jsp");
