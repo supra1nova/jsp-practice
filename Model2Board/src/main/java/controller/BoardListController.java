@@ -64,7 +64,7 @@ public class BoardListController extends HttpServlet{
 		req.setAttribute("allCount", allCount);	// 전체 게시글 숫자
 		req.setAttribute("currentPage", currentPage);	// 현재 페이지 번호
 		
-		RequestDispatcher rd = req.getRequestDispatcher("BoardList.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/JSP/BoardList.jsp");
 		rd.forward(req, resp);
 	}
 }
