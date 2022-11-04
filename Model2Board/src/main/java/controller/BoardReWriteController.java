@@ -34,7 +34,7 @@ public class BoardReWriteController extends HttpServlet {
 		req.setAttribute("reStep", req.getParameter("re_step"));
 		req.setAttribute("reLevel", req.getParameter("re_level"));
 		
-		RequestDispatcher rd = req.getRequestDispatcher("BoardReWriteForm.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/JSP/BoardReWriteForm.jsp");
 		rd.forward(req, resp);
 	}
 }

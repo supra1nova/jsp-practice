@@ -27,6 +27,8 @@ public class BoardInfoController extends HttpServlet {
 	
 	protected void reqPro(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int num = Integer.valueOf(req.getParameter("num"));
+		Integer artNum = Integer.valueOf(req.getParameter("artNum"));
+		
 		BoardNewDao bDao = new BoardNewDao();
 		BoardNewBean bBean = bDao.getArticle(num);
 
@@ -36,8 +38,13 @@ public class BoardInfoController extends HttpServlet {
 			req.setAttribute("code", code);
 		}
 		
+		// 게시글 순차 번호가 넘어왔으면 attribute에 추가 
+		if(artNum != null) {
+			req.setAttribute("artNum", artNum);
+		}
+		
 		req.setAttribute("bBean", bBean);
-		RequestDispatcher rd = req.getRequestDispatcher("BoardInfo.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/JSP/BoardInfo.jsp");
 		rd.forward(req, resp);
 	}
 }
