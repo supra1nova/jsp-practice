@@ -55,8 +55,8 @@
 						modalBtn.click()
 						closeBtn.addEventListener("click", function(){history.go(-1)});
 					});	
-					document.querySelector("#staticBackdropLabel").innerHTML = "요청한 작업을 수행할 수 없습니다.";
-					document.querySelector(".modal-body").innerHTML = "게시글 비밀번호가 일치하지 않거나 공란이 있습니다. 다시 한 번 확인해 주세요.";
+					document.querySelector("#staticBackdropLabel").innerHTML = "실패";
+					document.querySelector(".modal-body").innerHTML = '${errMessage}';
 				</script>
 			</c:when>
 			<c:when test="${code == 200}" >
@@ -86,14 +86,16 @@
 					<td style="width: 30%" align="center" class="align-middle"> ${bBean.readcount }</td>
 				</tr>
 				<tr height="40">
-					<th style="width: 20%" class="text-center bg-dark text-white align-middle"> 작성자</th>
-					<td style="width: 30%" align="center" class="align-middle"> ${bBean.writer }</td>
 					<th style="width: 20%" class="text-center bg-dark text-white align-middle"> 작성일</th>
-					<td style="width: 30%" align="center" class="align-middle"> ${bBean.reg_date }</td>
+					<td style="width: 30%" align="center" class="align-middle"> ${String.valueOf(bBean.reg_date).replace("T", " ") }</td>
+					<th style="width: 20%" class="text-center bg-dark text-white align-middle"> 수정일</th>
+					<td style="width: 30%" align="center" class="align-middle"> ${String.valueOf(bBean.up_date).replace("T", " ") }</td>
 				</tr>
 				<tr height="40">
+					<th style="width: 20%" class="text-center bg-dark text-white align-middle"> 작성자</th>
+					<td style="width: 30%" align="center" class="align-middle"> ${bBean.writer }</td>
 					<th style="width: 20%" class="text-center bg-dark text-white align-middle"> 이메일</th>
-					<td align="left" colspan="3" style="padding-left: 20px" class="align-middle"> ${bBean.email }</td>
+					<td style="width: 30%" align="center" class="align-middle"> ${bBean.email }</td>
 				</tr>
 				<tr height="40">
 					<th style="width: 20%" class="text-center bg-dark text-white align-middle"> 제목</th>
@@ -106,13 +108,13 @@
 				
 			</table>
 			<div>
-				<button type="button" class="btn btn-outline-dark" onclick="location.href='BoardReWriteController?num=${bBean.num }&ref=${bBean.ref }&re_step=${bBean.re_step }&re_level=${bBean.re_level }'" >답글쓰기</button>
+				<button type="button" class="btn btn-outline-dark" onclick="location.href='BoardReWriteController?pageNum=${currentPage}&num=${bBean.num }&ref=${bBean.ref }&re_step=${bBean.re_step }&re_level=${bBean.re_level }'" >답글쓰기</button>
 				&nbsp;&nbsp;
-				<button type="button" class="btn btn-outline-dark" onclick="location.href='BoardUpdateController?num=${bBean.num}&artNum=${artNum}'">수정하기</button>
+				<button type="button" class="btn btn-outline-dark" onclick="location.href='BoardUpdateController?pageNum=${currentPage}&num=${bBean.num}&artNum=${artNum}'">수정하기</button>
 				&nbsp;&nbsp;
 				<button type="button" class="btn btn-outline-dark" onclick="location.href='BoardDeleteController?num=${bBean.num}'">삭제하기</button>
 				&nbsp;&nbsp;
-				<button type="button" class="btn btn-outline-dark" onclick="location.href='BoardListController'">목록보기</button>
+				<button type="button" class="btn btn-outline-dark" onclick="location.href='BoardListController?pageNum=${currentPage}'">목록보기</button>
 			</div>
 		</div>
 	</div>

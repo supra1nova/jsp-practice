@@ -33,11 +33,12 @@ public class BoardDeleteProcController extends HttpServlet {
 		if(res) {
 			bDao.deleteArticle(num);
 			req.setAttribute("code", "200");
-			rd = req.getRequestDispatcher("BoardListController");
+			// rd = req.getRequestDispatcher("BoardListController");
 		} else {
 			req.setAttribute("code", "400");
-			rd = req.getRequestDispatcher("BoardDeleteController?num=" + num);
+			// rd = req.getRequestDispatcher("BoardDeleteController?num=" + num);
 		}
+		rd = req.getRequestDispatcher("BoardDeleteProcEndController?num=" + num);
 		
 		rd.forward(req, resp);
 	}

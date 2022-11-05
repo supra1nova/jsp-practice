@@ -33,10 +33,39 @@ public class BoardWriteProcController extends HttpServlet{
 		String password = req.getParameter("password");
 		String content = req.getParameter("content");
 		
-		// 비밀번호가 일치할 시 업데이트 후 200 번 코드 전달 or 업데이트 하지 않고 400 코드 전달
-		if((writer != null && writer != "") && (subject != null && subject != "") 
-				&& (email != null && subject !="") && (password != null && password != "") && (content != null && content != "")) {
+		try {
+			if(writer == null || writer == "") {
+				throw new Exception("'작성자 이름은 공백일 수 없습니다.'");
+			} else if(writer.length() > 20 || writer.length() < 2) {
+				throw new Exception("'작성자 이름은 최소 2자, 최대 20자로 설정해야 됩니다.'");
+			}
+			
+			if(subject == null || subject == "") {
+				throw new Exception("'제목은 공백일 수 없습니다.'");
+			} else if(subject.length() > 100 && subject.length() < 2) {
+				throw new Exception("'제목은 최소 2자, 최대 100자로 설정해야 됩니다.'");
+			}
+
+			if(email == null || email == "") {
+				throw new Exception("'이메일은 공백일 수 없습니다.'");
+			} else if(subject.length() > 50 && subject.length() < 8) {
+				throw new Exception("'제목은 최소 8자, 최대 50자로 설정해야 됩니다.'");
+			}
+			
+			if(password == null || password == "") {
+				throw new Exception("'게시글 비밀번호는 공백일 수 없습니다.'");
+			} else if(subject.length() > 10 && subject.length() < 4) {
+				throw new Exception("'게시글 비밀번호는 최소 4자, 최대 10자로 설정해야 됩니다.'");
+			}
+
+			if(content == null || content == "") {
+				throw new Exception("'게시글은 공백일 수 없습니다.'");
+			} else if(subject.length() > 500 && subject.length() < 2) {
+				throw new Exception("'게시글은 최소 2자, 최대 500자로 설정해야 됩니다.'");
+			}
+			
 			BoardNewBean bBean = new BoardNewBean();
+			
 			bBean.setWriter(writer);
 			bBean.setSubject(subject);
 			bBean.setEmail(email);
@@ -45,9 +74,11 @@ public class BoardWriteProcController extends HttpServlet{
 			
 			BoardNewDao bDao = new BoardNewDao();
 			bDao.insertArticle(bBean);
-			req.setAttribute("code", "200");
-		} else {
-			req.setAttribute("code", "400");
+			req.setAttribute("code", 200);
+			
+		} catch (Exception e) {
+			req.setAttribute("code", 400);
+			req.setAttribute("errMessage", e.getMessage());
 		}
 		
 		RequestDispatcher rd = req.getRequestDispatcher("BoardListController");

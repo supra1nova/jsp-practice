@@ -13,6 +13,11 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+<script type="text/javascript">
+	window.history.forward();
+	function noBack(){window.history.forward();}
+</script>
+<!-- <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload=""> -->
 <body>
 
 	<!-- Modal -->
@@ -54,8 +59,8 @@
 						modalBtn.click()
 						closeBtn.addEventListener("click", function(){history.go(-1)});
 					});	
-					document.querySelector("#staticBackdropLabel").innerHTML = "요청한 작업을 수행할 수 없습니다.";
-					document.querySelector(".modal-body").innerHTML = "비밀번호가 올바르지 않습니다. 다시 한 번 확인해 주세요.";
+					document.querySelector("#staticBackdropLabel").innerHTML = "실패";
+					document.querySelector(".modal-body").innerHTML = '${errMessage}';
 				</script>
 			</c:when>
 			<c:when test="${code == 200}" >
