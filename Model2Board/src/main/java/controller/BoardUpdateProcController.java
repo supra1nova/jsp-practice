@@ -27,9 +27,9 @@ public class BoardUpdateProcController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		Integer artNum = Integer.valueOf(req.getParameter("artNum"));
-
-		int num = Integer.valueOf(req.getParameter("num"));
+		Integer currentPage = Integer.valueOf(req.getParameter("currentPage"));
 		
+		int num = Integer.valueOf(req.getParameter("num"));
 		String subject = req.getParameter("subject");
 		String password = req.getParameter("password");
 		String content = req.getParameter("content");
@@ -49,7 +49,7 @@ public class BoardUpdateProcController extends HttpServlet {
 		} else {
 			req.setAttribute("code", "400");
 		}
-		RequestDispatcher rd = req.getRequestDispatcher("BoardInfoController?num=" + num + "&artNum=" + artNum);
+		RequestDispatcher rd = req.getRequestDispatcher("BoardInfoController?pageNum=" + currentPage + "&num=" + num + "&artNum=" + artNum);
 		rd.forward(req, resp);
 	}
 }

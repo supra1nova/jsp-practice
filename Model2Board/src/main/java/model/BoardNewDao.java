@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -79,12 +81,13 @@ public class BoardNewDao {
 				bBean.setEmail(rs.getString(3));
 				bBean.setSubject(rs.getString(4));
 				bBean.setPassword(rs.getString(5));
-				bBean.setReg_date(rs.getDate(6).toLocalDate());
-				bBean.setRef(rs.getInt(7));
-				bBean.setRe_step(rs.getInt(8));
-				bBean.setRe_level(rs.getInt(9));
-				bBean.setReadcount(rs.getInt(10));
-				bBean.setContent(rs.getString(11));
+				bBean.setReg_date(rs.getTimestamp(6).toLocalDateTime());
+				bBean.setUp_date(rs.getTimestamp(7).toLocalDateTime());
+				bBean.setRef(rs.getInt(8));
+				bBean.setRe_step(rs.getInt(9));
+				bBean.setRe_level(rs.getInt(10));
+				bBean.setReadcount(rs.getInt(11));
+				bBean.setContent(rs.getString(12));
 				bArr.add(bBean);
 			}
 		} catch (Exception e) {
@@ -126,8 +129,8 @@ public class BoardNewDao {
 				ref = rs.getInt(1) + 1;
 			}
 			
-			sql = "INSERT INTO jspPractice1.board(writer, email, subject, password, reg_date, ref, re_step, re_level, readcount, content) "
-					+ " VALUES( ?, ?, ?, ?, CURDATE(), ?, ?, ?, 0, ?)";
+			sql = "INSERT INTO jspPractice1.board(writer, email, subject, password, reg_date, up_date, ref, re_step, re_level, readcount, content) "
+					+ " VALUES( ?, ?, ?, ?, NOW(), NOW(), ?, ?, ?, 0, ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bBean.getWriter());
 			pstmt.setString(2, bBean.getEmail());
@@ -182,12 +185,13 @@ public class BoardNewDao {
 				bBean.setEmail(rs.getString(3));
 				bBean.setSubject(rs.getString(4));
 				bBean.setPassword(rs.getString(5));
-				bBean.setReg_date(rs.getDate(6).toLocalDate());
-				bBean.setRef(rs.getInt(7));
-				bBean.setRe_step(rs.getInt(8));
-				bBean.setRe_level(rs.getInt(9));
-				bBean.setReadcount(rs.getInt(10));
-				bBean.setContent(rs.getString(11));
+				bBean.setReg_date(rs.getTimestamp(6).toLocalDateTime());
+				bBean.setUp_date(rs.getTimestamp(7).toLocalDateTime());
+				bBean.setRef(rs.getInt(8));
+				bBean.setRe_step(rs.getInt(9));
+				bBean.setRe_level(rs.getInt(10));
+				bBean.setReadcount(rs.getInt(11));
+				bBean.setContent(rs.getString(12));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -267,8 +271,8 @@ public class BoardNewDao {
 			pstmt.setInt(2, reLevel);
 			pstmt.executeUpdate();
 			
-			String sql = "INSERT INTO jspPractice1.board(writer, email, subject, password, reg_date, ref, re_step, re_level, readcount, content) "
-					+ " VALUES(?, ?, ?, ?, CURDATE(), ?, ?, ?, 0, ?)";
+			String sql = "INSERT INTO jspPractice1.board(writer, email, subject, password, reg_date, up_date, ref, re_step, re_level, readcount, content) "
+					+ " VALUES(?, ?, ?, ?, NOW(), NOW(), ?, ?, ?, 0, ?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getWriter());
 			pstmt.setString(2, bean.getEmail());
@@ -282,13 +286,6 @@ public class BoardNewDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if(pstmt != null) {
 				try {
 					pstmt.close();
@@ -322,12 +319,13 @@ public class BoardNewDao {
 				bBean.setEmail(rs.getString(3));
 				bBean.setSubject(rs.getString(4));
 				bBean.setPassword(rs.getString(5));
-				bBean.setReg_date(rs.getDate(6).toLocalDate());
-				bBean.setRef(rs.getInt(7));
-				bBean.setRe_step(rs.getInt(8));
-				bBean.setRe_level(rs.getInt(9));
-				bBean.setReadcount(rs.getInt(10));
-				bBean.setContent(rs.getString(11));
+				bBean.setReg_date(rs.getTimestamp(6).toLocalDateTime());
+				bBean.setUp_date(rs.getTimestamp(7).toLocalDateTime());
+				bBean.setRef(rs.getInt(8));
+				bBean.setRe_step(rs.getInt(9));
+				bBean.setRe_level(rs.getInt(10));
+				bBean.setReadcount(rs.getInt(11));
+				bBean.setContent(rs.getString(12));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -397,7 +395,7 @@ public class BoardNewDao {
 		getCon();
 		try {
 			String sql = "UPDATE jspPractice1.board SET "
-					+ " subject = ?, content = ? WHERE num = ?";
+					+ " subject = ?, content = ?, up_date = NOW() WHERE num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, subject);
 			pstmt.setString(2, content);
@@ -463,4 +461,5 @@ public class BoardNewDao {
 			}
 		}
 	}
+
 }

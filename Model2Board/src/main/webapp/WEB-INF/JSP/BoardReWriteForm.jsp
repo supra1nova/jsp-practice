@@ -49,13 +49,15 @@
 					<!-- form에서 사용자로부터 입력받지 않고 답글 관련 데이터를 넘길 수 있도록 hidden 처리 -->
 				</table>
 				<div>
+					<input type="hidden" name="num" value="${num}">
+					<input type="hidden" name="currentPage" value="${currentPage}">
 					<input type="hidden" name="ref" value="${ref }">
 					<input type="hidden" name="re_step" value="${reStep }">
 					<input type="hidden" name="re_level" value="${reLevel }">
 					<input type="submit" class="btn btn-outline-dark" value="저장">&nbsp;&nbsp;
 					<input type="reset" class="btn btn-outline-dark" value="초기화">&nbsp;&nbsp;
 					<input type="button" class="btn btn-outline-dark" value="취소" onclick="history.go(-1)">&nbsp;&nbsp;
-					<input type="button" class="btn btn-outline-dark" value="전체글보기" onclick="location.href='BoardListController'">
+					<input type="button" class="btn btn-outline-dark" value="전체글보기" onclick="location.href='BoardListController?pageNum=' + ${currentPage}">
 				</div>
 			</form>
 		</div>

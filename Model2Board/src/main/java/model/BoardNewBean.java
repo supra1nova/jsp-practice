@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class BoardNewBean {
 	private Integer num;
@@ -8,7 +8,8 @@ public class BoardNewBean {
 	private String email;
 	private String subject;
 	private String password;
-	private LocalDate reg_date;
+	private LocalDateTime reg_date;
+	private LocalDateTime up_date;
 	private Integer ref;
 	private Integer re_step;
 	private Integer re_level;
@@ -45,10 +46,10 @@ public class BoardNewBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public LocalDate getReg_date() {
+	public LocalDateTime getReg_date() {
 		return reg_date;
 	}
-	public void setReg_date(LocalDate reg_date) {
+	public void setReg_date(LocalDateTime reg_date) {
 		this.reg_date = reg_date;
 	}
 	public Integer getRef() {
@@ -81,7 +82,11 @@ public class BoardNewBean {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public LocalDateTime getUp_date() {
+		return up_date;
+	}
+	public void setUp_date(LocalDateTime up_date) {
+		this.up_date = up_date;
+	}
 	
-	
-
 }

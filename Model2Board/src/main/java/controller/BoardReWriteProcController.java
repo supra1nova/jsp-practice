@@ -26,20 +26,70 @@ public class BoardReWriteProcController extends HttpServlet {
 
 	protected void reqPro(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
 		req.setCharacterEncoding("UTF-8");
-		BoardNewBean bBean = new BoardNewBean();
-		bBean.setWriter(req.getParameter("writer"));
-		bBean.setSubject(req.getParameter("subject"));
-		bBean.setEmail(req.getParameter("email"));
-		bBean.setPassword(req.getParameter("pass"));
-		bBean.setContent(req.getParameter("content")); 
-		bBean.setRef(Integer.valueOf(req.getParameter("ref")));
-		bBean.setRe_step(Integer.valueOf(req.getParameter("re_step")));
-		bBean.setRe_level(Integer.valueOf(req.getParameter("re_level")));
 		
-		BoardNewDao bDao = new BoardNewDao();
-		bDao.insertReply(bBean);
+		Integer num = Integer.valueOf(req.getParameter("num"));
+		Integer currentPage = Integer.valueOf(req.getParameter("currentPage"));
 		
-		RequestDispatcher rd = req.getRequestDispatcher("BoardListController");
+		Boolean res = false;
+		
+		String writer = req.getParameter("writer");
+		String subject = req.getParameter("subject");
+		String email = req.getParameter("email");
+		String password = req.getParameter("password");
+		String content = req.getParameter("content");
+		Integer ref = Integer.valueOf(req.getParameter("ref"));
+		Integer reStep = Integer.valueOf(req.getParameter("re_step"));
+		Integer reLevel = Integer.valueOf(req.getParameter("re_level"));
+		
+		
+		try {
+			if(writer == null || writer == "") {
+				throw new Exception("'작성자 이름은 공백일 수 없습니다.'");
+			} else if(writer.length() > 20 || writer.length() < 2) {
+				throw new Exception("'작성자 이름은 최소 2자, 최대 20자로 설정해야 됩니다.'");
+			}
+			
+			if(subject == null || subject == "") {
+				throw new Exception("'제목은 공백일 수 없습니다.'");
+			} else if(subject.length() > 100 && subject.length() < 2) {
+				throw new Exception("'제목은 최소 2자, 최대 100자로 설정해야 됩니다.'");
+			}
+
+			if(email == null || email == "") {
+				throw new Exception("'이메일은 공백일 수 없습니다.'");
+			} else if(subject.length() > 50 && subject.length() < 8) {
+				throw new Exception("'제목은 최소 8자, 최대 50자로 설정해야 됩니다.'");
+			}
+			
+			if(password == null || password == "") {
+				throw new Exception("'게시글 비밀번호는 공백일 수 없습니다.'");
+			} else if(subject.length() > 10 && subject.length() < 4) {
+				throw new Exception("'게시글 비밀번호는 최소 4자, 최대 10자로 설정해야 됩니다.'");
+			}
+
+			if(content == null || content == "") {
+				throw new Exception("'게시글은 공백일 수 없습니다.'");
+			} else if(subject.length() > 500 && subject.length() < 2) {
+				throw new Exception("'게시글은 최소 2자, 최대 500자로 설정해야 됩니다.'");
+			}
+			BoardNewBean bBean = new BoardNewBean();
+			bBean.setWriter(writer);
+			bBean.setSubject(subject);
+			bBean.setEmail(email);
+			bBean.setPassword(password);
+			bBean.setContent(content); 
+			bBean.setRef(ref);
+			bBean.setRe_step(reStep);
+			bBean.setRe_level(reLevel);
+			
+			BoardNewDao bDao = new BoardNewDao();
+			bDao.insertReply(bBean);
+		} catch (Exception e) {
+			req.setAttribute("code", 400);
+			req.setAttribute("errMessage", e.getMessage());
+		}
+		
+		RequestDispatcher rd = req.getRequestDispatcher("BoardListController?pageNum=" + currentPage);
 		rd.forward(req, resp);
 	}
 

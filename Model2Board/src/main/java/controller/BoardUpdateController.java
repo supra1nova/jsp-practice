@@ -31,6 +31,10 @@ public class BoardUpdateController extends HttpServlet {
 		if(artNum != null) {
 			req.setAttribute("artNum", artNum);
 		}
+		
+		Integer currentPage = Integer.valueOf(req.getParameter("pageNum"));
+		req.setAttribute("currentPage", currentPage);
+		
 		BoardNewDao bDao = new BoardNewDao();
 		BoardNewBean bBean = bDao.getArticleWithoutReadCounting(num);
 		req.setAttribute("bBean", bBean);

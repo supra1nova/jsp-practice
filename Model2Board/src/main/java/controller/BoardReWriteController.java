@@ -21,12 +21,15 @@ public class BoardReWriteController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		reqPro(req, resp);
 	}
 
 	private void reqPro(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		int num = Integer.valueOf(req.getParameter("num"));
+		int currentPage = Integer.valueOf(req.getParameter("pageNum"));
+		req.setAttribute("num", num);
+		req.setAttribute("currentPage", currentPage);
+		
 		BoardNewDao bDao = new BoardNewDao();
 		String prevTitle = bDao.getArticleSubject(num);
 		req.setAttribute("prevTitle", prevTitle);

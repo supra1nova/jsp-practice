@@ -55,8 +55,9 @@
 						modalBtn.click()
 						closeBtn.addEventListener("click", function(){history.go(-1)});
 					});	
-					document.querySelector("#staticBackdropLabel").innerHTML = "요청한 작업을 수행할 수 없습니다.";
-					document.querySelector(".modal-body").innerHTML = "공란이거나 유효하지 않은 값이 입력되었습니다. 다시 한 번 확인해 주세요.";
+					document.querySelector("#staticBackdropLabel").innerHTML = "실패";
+					console.log(${errMessage});
+					document.querySelector(".modal-body").innerText = ${errMessage};
 				</script>
 			</c:when>
 			<c:when test="${code == 200}" >
@@ -83,16 +84,17 @@
 				<thead class="bg-dark text-white align-middle text-center" >
 					<tr height="40">
 						<th width="80" class="align-middle">no</th>
-						<th width="310" class="align-middle">제목</th>
-						<th width="100" class="align-middle">글쓴이</th>
+						<th width="270" class="align-middle">제목</th>
+						<th width="90" class="align-middle">글쓴이</th>
 						<th width="40" class="align-middle">조회</th>
-						<th width="70" class="align-middle">게시일</th>
+						<th width="60" class="align-middle">게시일</th>
+						<th width="60" class="align-middle">수정일시</th>
 					</tr>
 				</thead>
 				<tbody style="border-bottom: 1px black solid">
 					<c:set var="number" value="${number }" />
 					<c:forEach var="bean" items="${bArr }">
-						<tr height="40" align="center" onClick="location.href='BoardInfoController?num=${bean.num}&artNum=${number}'" style="cursor: pointer; border-bottom: 0.5px solid rgb(237,231,225)" >
+						<tr height="40" align="center" onClick="location.href='BoardInfoController?pageNum=${currentPage}&num=${bean.num}&artNum=${number}'" style="cursor: pointer; border-bottom: 0.5px solid rgb(237,231,225)" >
 							<td width="80" class="align-middle">${number }</td>
 							<td width="320" align="left" class="align-middle">
 								<c:if test="${bean.re_step >1 }">
@@ -105,7 +107,8 @@
 							</td>
 							<td width="130" class="align-middle">${bean.writer }</td>
 							<td width="50" class="align-middle">${bean.readcount }</td>
-							<td width="120" class="align-middle">${bean.reg_date }</td>
+							<td width="120" class="align-middle">${String.valueOf((bean.reg_date)).replace("T","<br>")}</td>
+							<td width="120" class="align-middle">${String.valueOf((bean.up_date)).replace("T","<br>")}</td>
 						</tr>
 						<c:set var="number" value="${number-1 }" />
 					</c:forEach>
@@ -164,7 +167,7 @@
 							
 						</c:forEach>
 						
-						<c:if test="${endPage < allPageCount }">
+						<c:if test="${endPage + 1 < allPageCount }">
 							<li class="page-item">
 								<a href="BoardListController?pageNum=${startPage + pageBlock}" class="page-link text-dark" >다음</a>
 							</li>

@@ -25,10 +25,22 @@
 			<form action="BoardUpdateProcController" method="POST">
 				<table style="width: 80%" class="table table-sm">
 					<tr height="40">
+						<th width="120" class="text-center bg-dark text-white align-middle"> 글 번호</th>
+						<td align="center" width="180" class="align-middle"> ${artNum }</td>
+						<th width="120" class="text-center bg-dark text-white align-middle"> 조회수</th>
+						<td align="center" width="180" class="align-middle"> ${bBean.readcount }</td>
+					</tr>
+					<tr height="40">
+						<th width="120" class="text-center bg-dark text-white align-middle"> 작성일시</th>
+						<td align="center" width="180" class="align-middle"> ${bBean.reg_date }</td>
+						<th width="120" class="text-center bg-dark text-white align-middle"> 최근 수정일시</th>
+						<td align="center" width="180" class="align-middle"> ${bBean.up_date }</td>
+					</tr>
+					<tr height="40">
 						<th width="120" class="text-center bg-dark text-white align-middle"> 작성자</th>
 						<td align="center" width="180" class="align-middle"> ${bBean.writer }</td>
 						<th width="120" class="text-center bg-dark text-white align-middle"> 작성일</th>
-						<td align="center" width="180" class="align-middle"> ${bBean.reg_date }</td>
+						<td align="center" width="180" class="align-middle"> ${bBean.email }</td>
 					</tr>
 					<tr height="40">
 						<th width="120" class="bg-dark text-center text-white align-middle" onClick="document.getElementById('subject').focus()">제목</th>
@@ -46,6 +58,7 @@
 				<div>
 					<input type="hidden" name="artNum" value="${artNum }">
 					<input type="hidden" name="num" value="${bBean.num }">
+					<input type="hidden" name="currentPage" value="${currentPage }">
 					<input type="submit" class="btn btn-outline-dark" value="글수정">&nbsp;&nbsp;
 					<input type="button" class="btn btn-outline-dark" value="취소" onclick="history.go(-1)">&nbsp;&nbsp;
 					<input type="button" class="btn btn-outline-dark" onclick="location.href='BoardListController'" value="전체글보기">
