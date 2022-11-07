@@ -49,9 +49,9 @@
     
     <br> ✔️ JSTL, EL, vanilla javascript, Bootstrap 등을 이용한 프론트 페이지 구현
     <div style="display: flex; justify-content: center">
-<img width="49%" src="https://user-images.githubusercontent.com/100783749/200230119-e08db236-d577-4825-b3fc-cb693a7cad87.png" >
-<img width="49%" src="https://user-images.githubusercontent.com/100783749/200230131-a9df9a85-2ea7-47b9-95db-2e0753877c58.png" >
-<img width="49%" src="https://user-images.githubusercontent.com/100783749/200230137-7fab10d5-caaf-4d8c-80f8-2d5cee8c2ce8.png" >
-<img width="49%" src="https://user-images.githubusercontent.com/100783749/200230138-018d9cc9-61ff-47e8-b15f-02670ae37399.png" >
+<img width="45%" src="https://user-images.githubusercontent.com/100783749/200230119-e08db236-d577-4825-b3fc-cb693a7cad87.png" >
+<img width="45%" src="https://user-images.githubusercontent.com/100783749/200230131-a9df9a85-2ea7-47b9-95db-2e0753877c58.png" >
+<img width="45%" src="https://user-images.githubusercontent.com/100783749/200230137-7fab10d5-caaf-4d8c-80f8-2d5cee8c2ce8.png" >
+<img width="45%" src="https://user-images.githubusercontent.com/100783749/200230138-018d9cc9-61ff-47e8-b15f-02670ae37399.png" >
 </div>
 
