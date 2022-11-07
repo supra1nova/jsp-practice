@@ -32,13 +32,13 @@ public class BoardDeleteProcController extends HttpServlet {
 		RequestDispatcher rd = null;
 		if(res) {
 			bDao.deleteArticle(num);
-			req.setAttribute("code", "200");
-			// rd = req.getRequestDispatcher("BoardListController");
+			req.setAttribute("code", 200);
+			 rd = req.getRequestDispatcher("BoardListController");
 		} else {
-			req.setAttribute("code", "400");
-			// rd = req.getRequestDispatcher("BoardDeleteController?num=" + num);
+			req.setAttribute("code", 400);
+			req.setAttribute("errMessage", "게시글 비밀번호가 일치하지 않습니다.");
+			 rd = req.getRequestDispatcher("BoardDeleteController?num=" + num);
 		}
-		rd = req.getRequestDispatcher("BoardDeleteProcEndController?num=" + num);
 		
 		rd.forward(req, resp);
 	}

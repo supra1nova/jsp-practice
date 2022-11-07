@@ -50,6 +50,7 @@
 		<c:choose>
 			<c:when test="${code == 400}" >
 				<script>
+					console.log("111111");
 					document.addEventListener("DOMContentLoaded", function(e){
 						e.preventDefault();
 						modalBtn.click()
@@ -57,6 +58,7 @@
 					});	
 					document.querySelector("#staticBackdropLabel").innerHTML = "실패";
 					document.querySelector(".modal-body").innerHTML = '${errMessage}';
+					console.log("2222");
 				</script>
 			</c:when>
 			<c:when test="${code == 200}" >
