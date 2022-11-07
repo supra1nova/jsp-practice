@@ -44,10 +44,8 @@ public class BoardUpdateProcController extends HttpServlet {
 			}
 			
 			if(password == null || password == "") {
-				System.out.println(1111);
 				throw new Exception("게시글 비밀번호는 공백일 수 없습니다.");
 			} else if(password.length() > 10 || password.length() < 4) {
-				System.out.println(2222);
 				throw new Exception("게시글 비밀번호는 최소 4자, 최대 10자로 설정해야 됩니다.");
 			}
 

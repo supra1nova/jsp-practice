@@ -84,6 +84,8 @@ public class BoardReWriteProcController extends HttpServlet {
 			
 			BoardNewDao bDao = new BoardNewDao();
 			bDao.insertReply(bBean);
+			
+			req.setAttribute("code", 200);
 		} catch (Exception e) {
 			req.setAttribute("code", 400);
 			req.setAttribute("errMessage", e.getMessage());
