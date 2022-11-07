@@ -4,6 +4,7 @@
 
 # Custom ignore
 /Servers/
+/Document/**
 
 ### Eclipse ###
 .metadata

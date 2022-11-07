@@ -51,25 +51,25 @@ public class BoardReWriteProcController extends HttpServlet {
 			
 			if(subject == null || subject == "") {
 				throw new Exception("'제목은 공백일 수 없습니다.'");
-			} else if(subject.length() > 100 && subject.length() < 2) {
+			} else if(subject.length() > 100 || subject.length() < 2) {
 				throw new Exception("'제목은 최소 2자, 최대 100자로 설정해야 됩니다.'");
 			}
 
 			if(email == null || email == "") {
 				throw new Exception("'이메일은 공백일 수 없습니다.'");
-			} else if(subject.length() > 50 && subject.length() < 8) {
-				throw new Exception("'제목은 최소 8자, 최대 50자로 설정해야 됩니다.'");
+			} else if(email.length() > 50 || email.length() < 8) {
+				throw new Exception("'이메일은 최소 8자, 최대 50자로 설정해야 됩니다.'");
 			}
 			
 			if(password == null || password == "") {
 				throw new Exception("'게시글 비밀번호는 공백일 수 없습니다.'");
-			} else if(subject.length() > 10 && subject.length() < 4) {
+			} else if(password.length() > 10 || password.length() < 4) {
 				throw new Exception("'게시글 비밀번호는 최소 4자, 최대 10자로 설정해야 됩니다.'");
 			}
 
 			if(content == null || content == "") {
 				throw new Exception("'게시글은 공백일 수 없습니다.'");
-			} else if(subject.length() > 500 && subject.length() < 2) {
+			} else if(content.length() > 500 || content.length() < 2) {
 				throw new Exception("'게시글은 최소 2자, 최대 500자로 설정해야 됩니다.'");
 			}
 			BoardNewBean bBean = new BoardNewBean();
