@@ -22,6 +22,7 @@
   * 게시판 목록 조회 및 페이지네이션
   * 게시글 등록/조회/수정/삭제 및 관련 유효성 평가(필수 필드 검증, 비밀번호 검증 등)
   * 게시글 답글 등록/조회/수정/삭제(필수 필드 검증, 비밀번호 검증 등)
+  * github flow branch 전략 적용
   
   <br>
 - 구현 관련 기타 상세 :
@@ -32,7 +33,7 @@
     <br> ✔️ mariadb 이용한 게시판 DB 구축
     <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://user-images.githubusercontent.com/100783749/200229078-c10786b5-e495-410e-90d2-6afd6b9af989.png" />
     
-    <br> ✔️ JDBC Connection Pool를 이용한 mariadb 연결 및 클라이언트 요청 처리
+    <br> ✔️ JNDI (Java Naming Directory Interface)를 이용한 JDBC Connection Pool 설정 및 mariadb 연결
     
     ```java
     // server.xml
@@ -48,10 +49,24 @@
     ```
     
     <br> ✔️ JSTL, EL, vanilla javascript, Bootstrap 등을 이용한 프론트 페이지 구현
-    <div style="display: flex; justify-content: center">
-<img width="45%" src="https://user-images.githubusercontent.com/100783749/200230119-e08db236-d577-4825-b3fc-cb693a7cad87.png" >
-<img width="45%" src="https://user-images.githubusercontent.com/100783749/200230131-a9df9a85-2ea7-47b9-95db-2e0753877c58.png" >
-<img width="45%" src="https://user-images.githubusercontent.com/100783749/200230137-7fab10d5-caaf-4d8c-80f8-2d5cee8c2ce8.png" >
-<img width="45%" src="https://user-images.githubusercontent.com/100783749/200230138-018d9cc9-61ff-47e8-b15f-02670ae37399.png" >
-</div>
+      <table>
+        <tr>
+          <td>
+              <img width="100%" src="https://user-images.githubusercontent.com/100783749/200230119-e08db236-d577-4825-b3fc-cb693a7cad87.png" >
+          </td>
+          <td>
+              <img width="100%" src="https://user-images.githubusercontent.com/100783749/200230131-a9df9a85-2ea7-47b9-95db-2e0753877c58.png" >
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <img width="100%" src="https://user-images.githubusercontent.com/100783749/200230137-7fab10d5-caaf-4d8c-80f8-2d5cee8c2ce8.png" >
+          </td>
+          <td>
+              <img width="100%" src="https://user-images.githubusercontent.com/100783749/200230138-018d9cc9-61ff-47e8-b15f-02670ae37399.png" >
+          </td>
+        </tr>
+      </table>
 
+    <br> ✔️ Github-flow 전략 적용하여 기능별로 master에 merge 하는 방식으로 개발 진행
+    <img width="50%" src="https://user-images.githubusercontent.com/37354145/110271722-ed599a00-800b-11eb-99c9-d9fe8bed0f20.png">
