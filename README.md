@@ -11,7 +11,7 @@
     <img width="50%" src="https://user-images.githubusercontent.com/100783749/200230119-e08db236-d577-4825-b3fc-cb693a7cad87.png">
   </a>
   <p>
-  < 위 이미지 클릭시 새 창으로 시연 영상이 뜹니다. >
+  < 위 이미지 클릭시 시연 영상으로 연결됩니다. >
   </p>
 </div>
 <br>
