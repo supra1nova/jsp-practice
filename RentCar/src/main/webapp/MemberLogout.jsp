@@ -9,7 +9,8 @@
 	session.invalidate();
 %>
 <script>
-	document.location.href="RentCarMain.jsp?center=MemberLogin.jsp";
+	alert("로그아웃 되었습니다.");
+	document.location.href="RentCarMain.jsp";
 </script>
 </body>
 </html>

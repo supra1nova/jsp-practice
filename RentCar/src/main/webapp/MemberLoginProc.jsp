@@ -21,15 +21,30 @@
 			location.href="RentCarMain.jsp?center=MemberLogin.jsp";
 		</script>
 <%
-	} else {
+	} else{
+%>
+		<script>
+			alert("환영합니다 ");
+		</script>
+<%
 		session.setAttribute("id", id);
 		MemberDao mDao = new MemberDao();
 		MemberBean mBean = mDao.oneSelectMember(id);
 		Boolean result = mBean.getType().equals("a");
 		if(result) {
-			response.sendRedirect("RentCarMain.jsp?center=Admin.jsp");
-		} else { 
-			response.sendRedirect("RentCarMain.jsp");
+%>
+			<script>
+				window.location.href="RentCarMain.jsp?center=Admin.jsp";
+			</script>
+<%
+			// response.sendRedirect("RentCarMain.jsp?center=Admin.jsp");
+		} else {
+%>
+			<script>
+				window.location.href="RentCarMain.jsp";
+			</script>
+<%
+			//response.sendRedirect("RentCarMain.jsp");
 		}
 	}
 %>

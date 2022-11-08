@@ -10,7 +10,7 @@
 	if(session.getAttribute("id").equals(id)) {
 %>
 
-	<h1 style="text-align:center">회원 삭제하기</h1>
+	<h1 style="text-align:center">회원 탈퇴하기</h1>
 	<div style="display:flex; justify-content:center;">
 		
 			<table width="400" border="1">

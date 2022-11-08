@@ -50,7 +50,7 @@
 			<td align="center" colspan="2">
 				<input type="button" value="회원수정" onclick="location.href='RentCarMain.jsp?center=MemberUpdateForm.jsp?id=<%= mBean.getId() %>'"> 
 				&nbsp;&nbsp;
-				<input type="button" value="회원삭제" onclick="location.href='RentCarMain.jsp?center=MemberDeleteForm.jsp?id=<%= mBean.getId() %>'"> 
+				<input type="button" value="회원탈퇴" onclick="location.href='RentCarMain.jsp?center=MemberDeleteForm.jsp?id=<%= mBean.getId() %>'"> 
 			</td>
 		</tr>
 	</table>
