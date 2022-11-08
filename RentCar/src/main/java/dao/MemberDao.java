@@ -27,7 +27,7 @@ public class MemberDao {
 	// db에 접근할 수 있도록 도와주는 메서드
 	public void getCon() {
 		
-		// 기존 java.sql.Connection를 이용한 DB 접근 방식 
+		// 기존 JDBC + java.sql.Connection를 이용한 DB 접근 방식 
 //		try {
 //			// 1. DB 선언 - jdbc 드라이버 정의
 //			Class.forName("org.mariadb.jdbc.Driver");
@@ -64,16 +64,16 @@ public class MemberDao {
 		getCon();
 		try{
 			// 3. 접속후 쿼리 준비해 쿼리를 사용하도록 설정
-			String sql = "INSERT INTO jspPractice1.member VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO jspPractice1.member(id, pass1, email, tel, job, hobby, age, info) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setString(1, mBean.getId());
 			pstmt.setString(2, mBean.getPass1());
 			pstmt.setString(3, mBean.getEmail());
 			pstmt.setString(4, mBean.getTel());
-			pstmt.setString(5, mBean.getHobby());
-			pstmt.setString(6, mBean.getJob());
+			pstmt.setString(5, mBean.getJob());
+			pstmt.setString(6, mBean.getHobby());
 			pstmt.setString(7, mBean.getAge());
 			pstmt.setString(8, mBean.getInfo());
 			
@@ -111,8 +111,8 @@ public class MemberDao {
 				bean.setPass1(rs.getString(2));
 				bean.setEmail(rs.getString(3));
 				bean.setTel(rs.getString(4));
-				bean.setHobby(rs.getString(5));
-				bean.setJob(rs.getString(6));
+				bean.setJob(rs.getString(5));
+				bean.setHobby(rs.getString(6));
 				bean.setAge(rs.getString(7));
 				bean.setInfo(rs.getString(8));
 				
@@ -150,11 +150,25 @@ public class MemberDao {
 				mBean.setId(rs.getString(1));
 				mBean.setPass1(rs.getString(2));
 				mBean.setEmail(rs.getString(3));
-				mBean.setTel(rs.getString(4));
+				if(rs.getString(4) == null) {
+					mBean.setTel("-");
+				} else {
+					mBean.setTel(rs.getString(4));
+				}
 				mBean.setJob(rs.getString(5));
 				mBean.setHobby(rs.getString(6));
 				mBean.setAge(rs.getString(7));
+				if(rs.getString(7) == null) {
+					mBean.setAge("-");
+				} else {
+					mBean.setAge(rs.getString(7));
+				}
 				mBean.setInfo(rs.getString(8));
+				if(rs.getString(8) == null) {
+					mBean.setInfo("-");
+				} else {
+					mBean.setInfo(rs.getString(8));
+				}
 				mBean.setType(rs.getString(9));
 			}
 		} catch (Exception e) {

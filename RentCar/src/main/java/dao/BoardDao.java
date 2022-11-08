@@ -38,7 +38,7 @@ public class BoardDao {
 			getCon();
 			
 			// 가장 큰 ref 값을 읽어오는 쿼리 준비 및 실행
-			String refsql = "SELECT max(ref) FROM jspPractice1.board";
+			String refsql = "SELECT max(ref) FROM jspPractice1.model1board";
 			pstmt = con.prepareStatement(refsql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -46,7 +46,7 @@ public class BoardDao {
 			}
 			
 			// 작성하려는 게시글의 데이터를 테이블에 저장
-			String sql = "INSERT INTO jspPractice1.board("
+			String sql = "INSERT INTO jspPractice1.model1board("
 					+ "writer, email, subject, password, reg_date, ref, re_step, re_level, readcount, content"
 					+ ") VALUES("
 					+ "?, ?, ?, ?, CURDATE(), ?, ?, ?, 0, ?"
@@ -78,7 +78,7 @@ public class BoardDao {
 		try {
 			getCon();
 			
-			String sql = "SELECT * FROM jspPractice1.board ORDER BY ref desc, re_step asc LIMIT ?, ?";
+			String sql = "SELECT * FROM jspPractice1.model1board ORDER BY ref desc, re_step asc LIMIT ?, ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow-1);
 			pstmt.setInt(2, pageSize);
@@ -114,13 +114,13 @@ public class BoardDao {
 			getCon();
 			
 			// 조회수 증가
-			String readsql = "UPDATE jspPractice1.board SET readcount = readcount+1 WHERE num = ?";
+			String readsql = "UPDATE jspPractice1.model1board SET readcount = readcount+1 WHERE num = ?";
 			pstmt = con.prepareStatement(readsql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
 			
 			// 게시글 데이터 조회 
-			String sql = "SELECT * FROM jspPractice1.board WHERE num = ?";
+			String sql = "SELECT * FROM jspPractice1.model1board WHERE num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -159,14 +159,14 @@ public class BoardDao {
 			getCon();
 			
 			// 부모 글보다 큰 re_level의 값을 모두 1씩 증가시킨다.
-			String levelSql = "UPDATE jspPractice1.board SET re_level = re_level + 1 WHERE ref = ? and re_level > ? ";
+			String levelSql = "UPDATE jspPractice1.model1board SET re_level = re_level + 1 WHERE ref = ? and re_level > ? ";
 			pstmt = con.prepareStatement(levelSql);
 			pstmt.setInt(1, ref);
 			pstmt.setInt(2, re_level);
 			pstmt.executeUpdate();
 			
 			// 답변 글 데이터를 저장
-			String sql = "INSERT INTO jspPractice1.board("
+			String sql = "INSERT INTO jspPractice1.model1board ("
 					+ "writer, email, subject, password, reg_date, ref, re_step, re_level, readcount, content"
 					+ ") VALUES("
 					+ "?, ?, ?, ?, CURDATE(), ?, ?, ?, 0, ?"
@@ -197,7 +197,7 @@ public class BoardDao {
 			getCon();
 			
 			// 게시글 데이터 조회 
-			String sql = "SELECT * FROM jspPractice1.board WHERE num = ?";
+			String sql = "SELECT * FROM jspPractice1.model1board WHERE num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -232,7 +232,7 @@ public class BoardDao {
 		try {
 			getCon();
 			
-			String sql = "SELECT password FROM jspPractice1.board WHERE num = ?";
+			String sql = "SELECT password FROM jspPractice1.model1board WHERE num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -255,7 +255,7 @@ public class BoardDao {
 		try {
 			getCon();
 			
-			String sql = "UPDATE jspPractice1.board SET subject = ?, content = ? WHERE num = ?";
+			String sql = "UPDATE jspPractice1.model1board SET subject = ?, content = ? WHERE num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getSubject());
 			pstmt.setString(2, bean.getContent());
@@ -274,7 +274,7 @@ public class BoardDao {
 		try {
 			getCon();
 			
-			String sql = "DELETE FROM jspPractice1.board WHERE num = ?";
+			String sql = "DELETE FROM jspPractice1.model1board WHERE num = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
@@ -291,7 +291,7 @@ public class BoardDao {
 		try {
 			getCon();
 			
-			String sql = "SELECT COUNT(*) FROM jspPractice1.board";
+			String sql = "SELECT COUNT(*) FROM jspPractice1.model1board ";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {

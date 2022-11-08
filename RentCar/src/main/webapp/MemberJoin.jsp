@@ -28,23 +28,23 @@
 			<td widht="350" align="center"><input type="tel" name="tel" size="40">
 		</tr>
 		<tr height="50">
-			<td width="150" align="center"> 당신의 직업은 </td>
-			<td width="350" align="center">
-				<select name="job">
-					<option value="교사">교사</option>
-					<option value="변호사">변호사</option>
-					<option value="의사">의사</option>
-					<option value="기술사">기술사</option>
-				</select>
-			</td>
-		</tr>
-		<tr height="50">
 			<td width="150" align="center"> 취미 </td>
 			<td width="350" align="center">
 				<input type="checkbox" name="hobby" value="캠핑"> 캠핑 &nbsp;&nbsp;
 				<input type="checkbox" name="hobby" value="등산"> 등산 &nbsp;&nbsp;
 				<input type="checkbox" name="hobby" value="영화"> 영화 &nbsp;&nbsp;
 				<input type="checkbox" name="hobby" value="독서"> 독서 &nbsp;&nbsp;
+			</td>
+		</tr>
+		<tr height="50">
+			<td width="150" align="center"> 당신의 직업은 </td>
+			<td width="350" align="center">
+				<select name="job">
+					<option value="회사원">회사원</option>
+					<option value="자영업자">자영업자</option>
+					<option value="공무원">공무원</option>
+					<option value="기타">기타</option>
+				</select>
 			</td>
 		</tr>
 		<tr height="50">
